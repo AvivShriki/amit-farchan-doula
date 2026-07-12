@@ -1,0 +1,718 @@
+/* ==========================================================================
+   עמית פרחן — דולה מוסמכת | Design tokens + מערכת רכיבים
+   ========================================================================== */
+
+:root {
+  /* צבעים */
+  --color-bg: #FBF3EC;
+  --color-bg-alt: #F3E6D9;
+  --color-card: #FFFFFF;
+  --color-sage: #7C8C6E;
+  --color-sage-dark: #5D6B51;
+  --color-terracotta: #8B5A42;
+  --color-terracotta-dark: #714936;
+  --color-text: #362F28;
+  --color-text-soft: #6B6259;
+  --color-border: #E8DACB;
+  --color-focus: #2F6F5E;
+
+  /* טיפוגרפיה */
+  --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
+  --font-body: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ריווח (סקאלה של 8px) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+
+  /* רדיוסים וצללים */
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 8px 24px rgba(54, 47, 40, 0.08);
+  --shadow-card: 0 4px 16px rgba(54, 47, 40, 0.06);
+
+  --container-max: 1180px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.6;
+  direction: rtl;
+  text-align: right;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  margin: 0 0 var(--space-2);
+  color: var(--color-text);
+}
+
+h1 { font-size: clamp(2.1rem, 4.5vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+h3 { font-size: 1.25rem; }
+
+p { margin: 0 0 var(--space-2); }
+
+.eyebrow {
+  font-size: 0.95rem;
+  color: var(--color-sage-dark);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-1);
+}
+
+.script-accent {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: var(--color-terracotta-dark);
+  display: block;
+}
+
+/* קישור דילוג לנגישות מקלדת */
+.skip-link {
+  position: absolute;
+  right: var(--space-2);
+  top: -60px;
+  background: var(--color-sage-dark);
+  color: #fff;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  z-index: 1000;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+/* פוקוס נגיש בכל מקום */
+a:focus-visible,
+button:focus-visible,
+.nav-link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   כפתורים
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+  min-height: 48px;
+  line-height: 1;
+}
+.btn:active { transform: scale(0.98); }
+
+.btn-primary {
+  background: var(--color-terracotta);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--color-terracotta-dark); }
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+.btn-secondary:hover {
+  background: var(--color-text);
+  color: #fff;
+}
+
+.btn-sage {
+  background: var(--color-sage);
+  color: #fff;
+}
+.btn-sage:hover { background: var(--color-sage-dark); }
+
+.btn-small {
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  min-height: 40px;
+}
+
+/* ==========================================================================
+   הדר / ניווט
+   ========================================================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(251, 243, 236, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--color-text);
+}
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.brand-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--color-text-soft);
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+}
+.nav-link {
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.98rem;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.nav-link:hover,
+.nav-link.is-active {
+  color: var(--color-sage-dark);
+  border-color: var(--color-sage);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+}
+.nav-toggle span,
+.nav-toggle::before,
+.nav-toggle::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-text);
+  margin: 6px auto;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* ==========================================================================
+   הירו
+   ========================================================================== */
+
+.hero {
+  padding-block: var(--space-6) var(--space-5);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+.hero-text .lead {
+  font-size: 1.15rem;
+  color: var(--color-text-soft);
+  max-width: 46ch;
+}
+.hero-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+.hero-media {
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  aspect-ratio: 4/5;
+}
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page-hero {
+  padding-block: var(--space-5);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+.page-hero-media {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  aspect-ratio: 4/3;
+}
+.page-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-sage-dark);
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+.back-link:hover { text-decoration: underline; }
+
+/* ==========================================================================
+   סקשן כללי
+   ========================================================================== */
+
+.section {
+  padding-block: var(--space-6);
+}
+.section-alt {
+  background: var(--color-bg-alt);
+}
+.section-head {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: var(--space-5);
+}
+
+/* ==========================================================================
+   כרטיסי שירות
+   ========================================================================== */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+.service-card {
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  padding: var(--space-3);
+  text-align: center;
+  text-decoration: none;
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.service-card:hover,
+.service-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+.service-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--color-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-2);
+  color: var(--color-sage-dark);
+}
+.service-card h3 {
+  margin-bottom: 6px;
+}
+.service-card p {
+  font-size: 0.92rem;
+  color: var(--color-text-soft);
+  margin-bottom: 0;
+}
+.service-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--color-sage);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.quote-line {
+  text-align: center;
+  color: var(--color-terracotta-dark);
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  margin-top: var(--space-4);
+}
+
+/* ==========================================================================
+   מי אני
+   ========================================================================== */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-5);
+  align-items: center;
+}
+.about-media {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  aspect-ratio: 4/5;
+}
+.about-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-text .lead {
+  color: var(--color-text-soft);
+}
+
+/* ==========================================================================
+   מה כולל
+   ========================================================================== */
+
+.includes-list {
+  list-style: none;
+  margin: var(--space-3) 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+.includes-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-2);
+}
+.includes-list .check {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-sage);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   המלצות (קרוסלה)
+   ========================================================================== */
+
+.testimonials {
+  position: relative;
+  max-width: 720px;
+  margin-inline: auto;
+}
+.testimonial-track {
+  overflow: hidden;
+}
+.testimonial-slides {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+.testimonial-card {
+  flex: 0 0 100%;
+  margin: 0;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-4);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+.testimonial-quote-mark {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--color-sage);
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--space-1);
+}
+.testimonial-text {
+  font-size: 1.05rem;
+  margin-bottom: var(--space-2);
+}
+.testimonial-author {
+  color: var(--color-terracotta-dark);
+  font-weight: 600;
+  font-style: normal;
+}
+.testimonial-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: var(--space-3);
+}
+.testimonial-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-border);
+  cursor: pointer;
+  padding: 0;
+}
+.testimonial-dot.is-active {
+  background: var(--color-sage);
+}
+.testimonial-dot[aria-current="true"] {
+  background: var(--color-sage);
+}
+
+/* ==========================================================================
+   שאלות נפוצות
+   ========================================================================== */
+
+.faq-list {
+  max-width: 720px;
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-2);
+}
+.faq-item {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.faq-question {
+  width: 100%;
+  text-align: right;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 600;
+  padding: var(--space-2) var(--space-3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text);
+}
+.faq-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.faq-question[aria-expanded="true"] .faq-icon {
+  transform: rotate(45deg);
+}
+.faq-answer {
+  padding: 0 var(--space-3);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease, padding 0.25s ease;
+  color: var(--color-text-soft);
+}
+.faq-answer[data-open="true"] {
+  padding-bottom: var(--space-2);
+  max-height: 400px;
+}
+
+/* ==========================================================================
+   באנר CTA
+   ========================================================================== */
+
+.cta-banner {
+  background: var(--color-sage);
+  color: #fff;
+  border-radius: 28px;
+  padding: var(--space-5);
+  text-align: center;
+}
+.cta-banner h2 {
+  color: #fff;
+}
+.cta-banner p {
+  color: rgba(255,255,255,0.9);
+}
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+}
+.cta-banner .btn-primary {
+  background: #fff;
+  color: var(--color-sage-dark);
+}
+.cta-banner .btn-primary:hover {
+  background: var(--color-bg-alt);
+}
+.cta-banner .btn-secondary {
+  border-color: #fff;
+  color: #fff;
+}
+.cta-banner .btn-secondary:hover {
+  background: #fff;
+  color: var(--color-sage-dark);
+}
+
+/* ==========================================================================
+   פוטר
+   ========================================================================== */
+
+.site-footer {
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+}
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+.footer-social a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--color-text);
+  transition: background-color 0.2s ease;
+}
+.footer-social a:hover {
+  background: var(--color-sage);
+  color: #fff;
+}
+
+/* ==========================================================================
+   רספונסיביות
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .hero-grid,
+  .page-hero,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .page-hero-media { order: -1; }
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .main-nav ul {
+    display: none;
+  }
+  .nav-toggle {
+    display: block;
+  }
+  .main-nav.is-open ul {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    inset-inline: 0;
+    background: var(--color-bg);
+    padding: var(--space-2) var(--space-3) var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-2);
+  }
+}
+
+@media (max-width: 560px) {
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+  .hero-actions,
+  .cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn {
+    justify-content: center;
+  }
+}
