@@ -1,28 +1,29 @@
 /* ==========================================================================
    עמית פרחן — דולה מוסמכת | Design tokens + מערכת רכיבים
-   השראה: "porcelain apothecary at golden hour" (Emmalewisham design system) —
-   קנבס פשתן חמים, גוון סגול-איריס יחיד כמבטא, גבולות דקיקים במקום צללים,
-   כרטיסים ברדיוס נדיב מול כפתורים חדים, ורוגע עריכתי עם צפיפות דלילה.
+   קנבס קרם חם, מבטאים של סיג'-ירוק ורוז-חימר, כרטיסים עגולים עם צל רך,
+   כפתורי פיל, אייקוני קו דק, ובועות-דיבור להמלצות — בהשראת מוקאפ הייחוס
+   שהלקוחה אהבה. תנועה עדינה בסקרול ובכניסת ההירו, בכיבוד prefers-reduced-motion.
    ========================================================================== */
 
 :root {
-  /* צבעים — קנבס ואטמוספרה */
-  --color-canvas: #F2F1EF;        /* Stone Linen — רקע הדף */
-  --color-white: #FFFFFF;         /* Pure White — כרטיסים */
-  --color-blush: #F3C9D3;         /* Blush Petal — גוון אטמוספרי (מעודן מהמקור לטובת ניגודיות טקסט) */
-  --color-warm-ash: #A09C97;      /* Warm Ash — פאנלים מעומעמים */
-  --color-warm-ash-tint: #EBE7E1; /* גרסה בהירה של Warm Ash לסקשנים גדולים */
-  --color-lavender-tint: #EDEAF7; /* הד בהיר של הסגול, לרקעי אייקונים */
+  /* צבעים — קנבס */
+  --color-cream: #FBF1E6;
+  --color-cream-panel: #F4E4D6;
+  --color-white: #FFFFFF;
 
-  /* צבעים — מבטא ואחיזה */
-  --color-iris: #49369E;          /* Iris Violet — המבטא היחיד: קווי מתאר, לינקים, כפתור עיקרי */
-  --color-iris-focus: #524EB7;    /* Iris Focus — hover/focus */
-  --color-lavender: #A9A7DB;      /* Soft Lavender — גבולות דקיקים (hairline) */
+  /* צבעים — מבטאים */
+  --color-sage: #7E9172;
+  --color-sage-dark: #64765A;
+  --color-sage-tint: #E9EEE2;
+  --color-rose: #BD8268;
+  --color-rose-dark: #A0694F;
+  --color-rose-tint: #F6E2D9;
+  --color-cream-tint: #FBF3EC;
 
-  /* צבעים — טקסט */
-  --color-graphite: #000000;      /* טקסט ראשי, כותרות */
-  --color-charcoal: #333333;      /* טקסט משני */
-  --color-text-soft: #6B6259;
+  /* צבעים — טקסט וגבולות */
+  --color-text: #3B322B;
+  --color-text-soft: #7A6F63;
+  --color-border: #EAD9C7;
 
   /* טיפוגרפיה */
   --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
@@ -37,10 +38,11 @@
   --space-6: 64px;
   --space-7: 96px;
 
-  /* רדיוסים — כרטיסים רחבים מול כפתורים חדים (הגיאומטריה החתומה של המערכת) */
-  --radius-button: 6px;
-  --radius-badge: 10px;
-  --radius-card: 24px;
+  /* רדיוסים וצללים */
+  --radius-pill: 999px;
+  --radius-card: 28px;
+  --shadow-soft: 0 16px 36px rgba(59, 50, 43, 0.14);
+  --shadow-card: 0 8px 22px rgba(59, 50, 43, 0.08);
 
   --container-max: 1180px;
 }
@@ -52,8 +54,8 @@
 body {
   margin: 0;
   font-family: var(--font-body);
-  background: var(--color-canvas);
-  color: var(--color-graphite);
+  background: var(--color-cream);
+  color: var(--color-text);
   font-size: 16px;
   line-height: 1.6;
   direction: rtl;
@@ -80,7 +82,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   line-height: 1.2;
   margin: 0 0 var(--space-2);
-  color: var(--color-graphite);
+  color: var(--color-text);
 }
 
 h1 { font-size: clamp(2.1rem, 4.5vw, 3.4rem); }
@@ -91,8 +93,8 @@ p { margin: 0 0 var(--space-2); }
 
 .eyebrow {
   font-size: 0.9rem;
-  color: var(--color-iris);
-  font-weight: 500;
+  color: var(--color-sage-dark);
+  font-weight: 600;
   letter-spacing: 0.02em;
   margin-bottom: var(--space-1);
 }
@@ -101,8 +103,14 @@ p { margin: 0 0 var(--space-2); }
   font-family: var(--font-heading);
   font-style: italic;
   font-weight: 500;
-  color: var(--color-iris);
+  color: var(--color-rose-dark);
   display: block;
+}
+
+.heart-doodle {
+  color: var(--color-rose);
+  margin-block: var(--space-2);
+  animation: bob 4s ease-in-out infinite;
 }
 
 /* קישור דילוג לנגישות מקלדת */
@@ -110,10 +118,10 @@ p { margin: 0 0 var(--space-2); }
   position: absolute;
   right: var(--space-2);
   top: -60px;
-  background: var(--color-graphite);
+  background: var(--color-text);
   color: #fff;
   padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-badge);
+  border-radius: var(--radius-pill);
   z-index: 1000;
   transition: top 0.2s ease;
 }
@@ -125,15 +133,13 @@ p { margin: 0 0 var(--space-2); }
 a:focus-visible,
 button:focus-visible,
 .nav-link:focus-visible {
-  outline: 3px solid var(--color-iris-focus);
+  outline: 3px solid var(--color-sage-dark);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
 /* ==========================================================================
-   כפתורים — ללא מילוי כברירת מחדל; המבטא היחיד הוא Iris Violet.
-   חריגה מודעת: כפתור ה-CTA העיקרי (יצירת קשר) כן מלא, כי זהו עמוד לידים
-   ולא חנות — הפעולה החשובה בעמוד צריכה לבלוט.
+   כפתורים — פיל מלא, צל רך, הרמה עדינה במעבר עכבר
    ========================================================================== */
 
 .btn {
@@ -142,32 +148,34 @@ button:focus-visible,
   gap: 8px;
   font-family: var(--font-body);
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   padding: 14px 28px;
-  border-radius: var(--radius-button);
-  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
   min-height: 48px;
   line-height: 1;
 }
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(0) scale(0.98); }
 
 .btn-primary {
-  background: var(--color-iris);
-  border-color: var(--color-iris);
+  background: var(--color-rose);
   color: #fff;
+  box-shadow: var(--shadow-card);
 }
-.btn-primary:hover { background: var(--color-iris-focus); border-color: var(--color-iris-focus); }
+.btn-primary:hover { background: var(--color-rose-dark); }
 
 .btn-secondary {
   background: transparent;
-  border-color: var(--color-iris);
-  color: var(--color-iris);
+  border-color: var(--color-text);
+  color: var(--color-text);
 }
 .btn-secondary:hover {
-  border-color: var(--color-graphite);
-  color: var(--color-graphite);
+  background: var(--color-text);
+  color: #fff;
 }
 
 .btn-small {
@@ -177,15 +185,16 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   הדר / ניווט — קו דק ושקט, ללא רקע כבד וללא צל
+   הדר / ניווט
    ========================================================================== */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-canvas);
-  border-bottom: 1px solid var(--color-lavender);
+  background: rgba(251, 241, 230, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .nav-wrap {
@@ -201,12 +210,12 @@ button:focus-visible,
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--color-graphite);
+  color: var(--color-text);
 }
 .brand-name {
   font-family: var(--font-heading);
   font-size: 1.15rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.1;
 }
 .brand-sub {
@@ -220,12 +229,12 @@ button:focus-visible,
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: var(--color-lavender-tint);
+  background: var(--color-cream-panel);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--color-iris);
+  color: var(--color-rose-dark);
 }
 
 .main-nav {
@@ -242,17 +251,16 @@ button:focus-visible,
 }
 .nav-link {
   text-decoration: none;
-  color: var(--color-charcoal);
-  font-size: 0.95rem;
-  font-weight: 400;
+  color: var(--color-text);
+  font-size: 0.98rem;
   padding-bottom: 4px;
-  border-bottom: 1px solid transparent;
+  border-bottom: 2px solid transparent;
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 .nav-link:hover,
 .nav-link.is-active {
-  color: var(--color-iris);
-  border-color: var(--color-iris);
+  color: var(--color-sage-dark);
+  border-color: var(--color-sage);
 }
 
 .nav-toggle {
@@ -270,28 +278,29 @@ button:focus-visible,
   content: "";
   display: block;
   width: 24px;
-  height: 1.5px;
-  background: var(--color-graphite);
+  height: 2px;
+  background: var(--color-text);
   margin: 6px auto;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 /* ==========================================================================
-   הירו
+   הירו — תמונה בצורת "בלוב" אורגנית, כניסה מדורגת
    ========================================================================== */
 
 .hero {
   padding-block: var(--space-6) var(--space-5);
+  overflow: hidden;
 }
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1.05fr 1fr;
   gap: var(--space-5);
   align-items: center;
 }
 .hero-text .lead {
-  font-size: 1.1rem;
-  color: var(--color-charcoal);
+  font-size: 1.15rem;
+  color: var(--color-text-soft);
   max-width: 46ch;
 }
 .hero-actions {
@@ -302,10 +311,10 @@ button:focus-visible,
 }
 .hero-media {
   position: relative;
-  border-radius: var(--radius-card);
   overflow: hidden;
-  border: 1px solid var(--color-lavender);
+  box-shadow: var(--shadow-soft);
   aspect-ratio: 4/5;
+  border-radius: 46% 54% 61% 39% / 44% 40% 60% 56%;
 }
 .hero-media img {
   width: 100%;
@@ -323,7 +332,7 @@ button:focus-visible,
 .page-hero-media {
   border-radius: var(--radius-card);
   overflow: hidden;
-  border: 1px solid var(--color-lavender);
+  box-shadow: var(--shadow-soft);
   aspect-ratio: 4/3;
 }
 .page-hero-media img {
@@ -335,12 +344,91 @@ button:focus-visible,
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--color-iris);
+  color: var(--color-sage-dark);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: var(--space-2);
 }
-.back-link:hover { color: var(--color-graphite); }
+.back-link:hover { text-decoration: underline; }
+
+/* ==========================================================================
+   כניסה מדורגת של ההירו (אנימציה חד-פעמית בטעינה)
+   ========================================================================== */
+
+.hero-text > * {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+.hero-text > *:nth-child(1) { animation-delay: 0.05s; }
+.hero-text > *:nth-child(2) { animation-delay: 0.15s; }
+.hero-text > *:nth-child(3) { animation-delay: 0.25s; }
+.hero-text > *:nth-child(4) { animation-delay: 0.32s; }
+.hero-text > *:nth-child(5) { animation-delay: 0.4s; }
+.hero-media {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: heroImageIn 0.8s ease 0.2s forwards;
+}
+
+.page-hero-text > * {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fadeInUp 0.7s ease forwards;
+}
+.page-hero-text > *:nth-child(1) { animation-delay: 0.05s; }
+.page-hero-text > *:nth-child(2) { animation-delay: 0.15s; }
+.page-hero-text > *:nth-child(3) { animation-delay: 0.25s; }
+.page-hero-text > *:nth-child(4) { animation-delay: 0.32s; }
+.page-hero-media {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: heroImageIn 0.8s ease 0.2s forwards;
+}
+
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroImageIn {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ==========================================================================
+   אנימציית סקרול — עדינה, חד-פעמית, מכבדת prefers-reduced-motion
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-stagger > * {
+  transition-delay: calc(var(--reveal-index, 0) * 0.08s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-text > *,
+  .hero-media,
+  .page-hero-text > *,
+  .page-hero-media,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .heart-doodle {
+    animation: none !important;
+  }
+}
 
 /* ==========================================================================
    סקשן כללי
@@ -350,10 +438,7 @@ button:focus-visible,
   padding-block: var(--space-6);
 }
 .section-alt {
-  background: var(--color-blush);
-}
-#faq.section-alt {
-  background: var(--color-warm-ash-tint);
+  background: var(--color-cream-panel);
 }
 .section-head {
   text-align: center;
@@ -363,7 +448,7 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   כרטיסי שירות — כרטיס רחב ברדיוס נדיב, גבול דק, ללא צל
+   כרטיסי שירות
    ========================================================================== */
 
 .services-grid {
@@ -377,9 +462,9 @@ button:focus-visible,
   padding: var(--space-3);
   text-align: center;
   text-decoration: none;
-  color: var(--color-graphite);
-  border: 1px solid var(--color-lavender);
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  color: var(--color-text);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -387,19 +472,19 @@ button:focus-visible,
 }
 .service-card:hover,
 .service-card:focus-visible {
-  border-color: var(--color-iris);
-  transform: translateY(-4px);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
 }
 .service-icon {
-  width: 64px;
-  height: 64px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
-  background: var(--color-lavender-tint);
+  background: var(--color-cream-panel);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: var(--space-2);
-  color: var(--color-iris);
+  color: var(--color-text);
 }
 .service-card h3 {
   margin-bottom: 6px;
@@ -413,17 +498,17 @@ button:focus-visible,
   position: absolute;
   top: 12px;
   left: 12px;
-  background: var(--color-iris);
+  background: var(--color-sage);
   color: #fff;
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 700;
   padding: 4px 10px;
-  border-radius: var(--radius-badge);
+  border-radius: var(--radius-pill);
 }
 
 .quote-line {
   text-align: center;
-  color: var(--color-iris);
+  color: var(--color-rose-dark);
   font-family: var(--font-heading);
   font-style: italic;
   font-size: 1.05rem;
@@ -431,7 +516,59 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   מי אני — סקשן אטמוספרי על גבי גוון Blush
+   תהליך העבודה — צעדים ממוספרים עם קו מחבר
+   ========================================================================== */
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  counter-reset: process;
+  position: relative;
+}
+.process-step {
+  text-align: center;
+  position: relative;
+  padding-top: var(--space-2);
+}
+.process-step::before {
+  counter-increment: process;
+  content: counter(process);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto var(--space-2);
+  border-radius: 50%;
+  background: var(--color-sage);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+.process-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 22px;
+  right: calc(50% + 22px);
+  width: calc(100% - 44px);
+  height: 2px;
+  background: var(--color-border);
+}
+.process-step h3 {
+  margin-bottom: 4px;
+}
+.process-step p {
+  font-size: 0.92rem;
+  color: var(--color-text-soft);
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   מי אני
    ========================================================================== */
 
 .about-grid {
@@ -441,9 +578,10 @@ button:focus-visible,
   align-items: center;
 }
 .about-media {
+  position: relative;
   border-radius: var(--radius-card);
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-soft);
   aspect-ratio: 4/5;
 }
 .about-media img {
@@ -451,8 +589,42 @@ button:focus-visible,
   height: 100%;
   object-fit: cover;
 }
+.about-media .heart-doodle {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  background: var(--color-white);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+  margin: 0;
+}
 .about-text .lead {
-  color: var(--color-charcoal);
+  color: var(--color-text-soft);
+}
+
+.stats-row {
+  display: flex;
+  gap: var(--space-3);
+  margin: var(--space-3) 0;
+  flex-wrap: wrap;
+}
+.stat {
+  text-align: center;
+}
+.stat strong {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--color-rose-dark);
+}
+.stat span {
+  font-size: 0.82rem;
+  color: var(--color-text-soft);
 }
 
 /* ==========================================================================
@@ -471,25 +643,25 @@ button:focus-visible,
   align-items: flex-start;
   gap: 12px;
   background: var(--color-white);
-  border: 1px solid var(--color-lavender);
   border-radius: var(--radius-card);
   padding: var(--space-2);
+  box-shadow: var(--shadow-card);
 }
 .includes-list .check {
   flex-shrink: 0;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: var(--color-iris);
+  background: var(--color-sage);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 /* ==========================================================================
-   המלצות (קרוסלה)
+   המלצות — בועות דיבור בגוונים מתחלפים
    ========================================================================== */
 
 .testimonials {
@@ -506,17 +678,36 @@ button:focus-visible,
 }
 .testimonial-card {
   flex: 0 0 100%;
-  margin: 0;
-  background: var(--color-white);
-  border: 1px solid var(--color-lavender);
+  margin: 0 0 14px;
+  background: var(--color-cream-tint);
   border-radius: var(--radius-card);
   padding: var(--space-4);
   text-align: center;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+.testimonial-card::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  right: 48px;
+  width: 28px;
+  height: 28px;
+  background: inherit;
+  border-radius: 0 0 4px 0;
+  transform: rotate(45deg);
+  box-shadow: 4px 4px 6px -4px rgba(59, 50, 43, 0.12);
+}
+.testimonial-slides > .testimonial-card:nth-child(3n+2) {
+  background: var(--color-sage-tint);
+}
+.testimonial-slides > .testimonial-card:nth-child(3n+3) {
+  background: var(--color-rose-tint);
 }
 .testimonial-quote-mark {
   font-family: var(--font-heading);
   font-size: 2.5rem;
-  color: var(--color-iris);
+  color: var(--color-rose);
   line-height: 1;
   display: block;
   margin-bottom: var(--space-1);
@@ -526,29 +717,30 @@ button:focus-visible,
   margin-bottom: var(--space-2);
 }
 .testimonial-author {
-  color: var(--color-iris);
-  font-weight: 500;
+  color: var(--color-text);
+  font-weight: 600;
   font-style: normal;
 }
 .testimonial-dots {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: var(--space-3);
+  margin-top: var(--space-4);
 }
 .testimonial-dot {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 1px solid var(--color-lavender);
-  background: transparent;
+  border: none;
+  background: var(--color-border);
   cursor: pointer;
   padding: 0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 .testimonial-dot.is-active,
 .testimonial-dot[aria-current="true"] {
-  background: var(--color-iris);
-  border-color: var(--color-iris);
+  background: var(--color-sage);
+  transform: scale(1.15);
 }
 
 /* ==========================================================================
@@ -563,9 +755,9 @@ button:focus-visible,
 }
 .faq-item {
   background: var(--color-white);
-  border: 1px solid var(--color-lavender);
   border-radius: var(--radius-card);
   overflow: hidden;
+  box-shadow: var(--shadow-card);
 }
 .faq-question {
   width: 100%;
@@ -575,17 +767,17 @@ button:focus-visible,
   cursor: pointer;
   font-family: var(--font-body);
   font-size: 1.02rem;
-  font-weight: 500;
+  font-weight: 600;
   padding: var(--space-2) var(--space-3);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-2);
-  color: var(--color-graphite);
+  color: var(--color-text);
 }
 .faq-icon {
   flex-shrink: 0;
-  color: var(--color-iris);
+  color: var(--color-rose-dark);
   transition: transform 0.2s ease;
 }
 .faq-question[aria-expanded="true"] .faq-icon {
@@ -596,7 +788,7 @@ button:focus-visible,
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.25s ease, padding 0.25s ease;
-  color: var(--color-charcoal);
+  color: var(--color-text-soft);
 }
 .faq-answer[data-open="true"] {
   padding-bottom: var(--space-2);
@@ -604,36 +796,46 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   באנר CTA — כרטיס Blush גדול, טקסט כהה לניגודיות
+   באנר CTA — תמונה + טקסט, כמו סקשן הסיום במוקאפ הייחוס
    ========================================================================== */
 
 .cta-banner {
-  background: var(--color-blush);
-  color: var(--color-graphite);
+  background: var(--color-white);
   border-radius: 32px;
   padding: var(--space-5);
+  box-shadow: var(--shadow-soft);
   text-align: center;
 }
-.cta-banner h2 {
-  color: var(--color-graphite);
+.cta-banner--split {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: var(--space-5);
+  align-items: center;
+  padding: var(--space-4);
+  text-align: right;
 }
-.cta-banner p {
-  color: var(--color-charcoal);
+.cta-media {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.cta-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cta-text h2 {
+  margin-bottom: 4px;
 }
 .cta-actions {
   display: flex;
   justify-content: center;
   gap: var(--space-2);
   flex-wrap: wrap;
-  margin-top: var(--space-2);
+  margin-top: var(--space-3);
 }
-.cta-banner .btn-secondary {
-  border-color: var(--color-graphite);
-  color: var(--color-graphite);
-}
-.cta-banner .btn-secondary:hover {
-  background: var(--color-graphite);
-  color: #fff;
+.cta-banner--split .cta-actions {
+  justify-content: flex-start;
 }
 
 /* ==========================================================================
@@ -642,7 +844,7 @@ button:focus-visible,
 
 .site-footer {
   padding-block: var(--space-4);
-  border-top: 1px solid var(--color-lavender);
+  border-top: 1px solid var(--color-border);
   text-align: center;
   color: var(--color-text-soft);
   font-size: 0.9rem;
@@ -657,16 +859,16 @@ button:focus-visible,
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--color-lavender-tint);
+  background: var(--color-cream-panel);
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--color-graphite);
+  color: var(--color-text);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 .footer-social a:hover {
-  background: var(--color-iris);
+  background: var(--color-sage);
   color: #fff;
 }
 
@@ -677,13 +879,23 @@ button:focus-visible,
 @media (max-width: 900px) {
   .hero-grid,
   .page-hero,
-  .about-grid {
+  .about-grid,
+  .cta-banner--split {
     grid-template-columns: 1fr;
   }
-  .page-hero-media { order: -1; }
-  .services-grid {
+  .cta-banner--split {
+    text-align: center;
+  }
+  .cta-banner--split .cta-actions {
+    justify-content: center;
+  }
+  .page-hero-media,
+  .cta-media { order: -1; }
+  .services-grid,
+  .process-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .process-step::after { display: none; }
   .main-nav ul {
     display: none;
   }
@@ -696,15 +908,16 @@ button:focus-visible,
     position: absolute;
     top: 100%;
     inset-inline: 0;
-    background: var(--color-canvas);
+    background: var(--color-cream);
     padding: var(--space-2) var(--space-3) var(--space-3);
-    border-bottom: 1px solid var(--color-lavender);
+    border-bottom: 1px solid var(--color-border);
     gap: var(--space-2);
   }
 }
 
 @media (max-width: 560px) {
-  .services-grid {
+  .services-grid,
+  .process-grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2);
   }
@@ -715,5 +928,8 @@ button:focus-visible,
   }
   .btn {
     justify-content: center;
+  }
+  .stats-row {
+    gap: var(--space-2);
   }
 }
