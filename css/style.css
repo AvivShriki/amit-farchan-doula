@@ -1,20 +1,28 @@
 /* ==========================================================================
    עמית פרחן — דולה מוסמכת | Design tokens + מערכת רכיבים
+   השראה: "porcelain apothecary at golden hour" (Emmalewisham design system) —
+   קנבס פשתן חמים, גוון סגול-איריס יחיד כמבטא, גבולות דקיקים במקום צללים,
+   כרטיסים ברדיוס נדיב מול כפתורים חדים, ורוגע עריכתי עם צפיפות דלילה.
    ========================================================================== */
 
 :root {
-  /* צבעים */
-  --color-bg: #FBF3EC;
-  --color-bg-alt: #F3E6D9;
-  --color-card: #FFFFFF;
-  --color-sage: #7C8C6E;
-  --color-sage-dark: #5D6B51;
-  --color-terracotta: #8B5A42;
-  --color-terracotta-dark: #714936;
-  --color-text: #362F28;
+  /* צבעים — קנבס ואטמוספרה */
+  --color-canvas: #F2F1EF;        /* Stone Linen — רקע הדף */
+  --color-white: #FFFFFF;         /* Pure White — כרטיסים */
+  --color-blush: #F3C9D3;         /* Blush Petal — גוון אטמוספרי (מעודן מהמקור לטובת ניגודיות טקסט) */
+  --color-warm-ash: #A09C97;      /* Warm Ash — פאנלים מעומעמים */
+  --color-warm-ash-tint: #EBE7E1; /* גרסה בהירה של Warm Ash לסקשנים גדולים */
+  --color-lavender-tint: #EDEAF7; /* הד בהיר של הסגול, לרקעי אייקונים */
+
+  /* צבעים — מבטא ואחיזה */
+  --color-iris: #49369E;          /* Iris Violet — המבטא היחיד: קווי מתאר, לינקים, כפתור עיקרי */
+  --color-iris-focus: #524EB7;    /* Iris Focus — hover/focus */
+  --color-lavender: #A9A7DB;      /* Soft Lavender — גבולות דקיקים (hairline) */
+
+  /* צבעים — טקסט */
+  --color-graphite: #000000;      /* טקסט ראשי, כותרות */
+  --color-charcoal: #333333;      /* טקסט משני */
   --color-text-soft: #6B6259;
-  --color-border: #E8DACB;
-  --color-focus: #2F6F5E;
 
   /* טיפוגרפיה */
   --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
@@ -29,11 +37,10 @@
   --space-6: 64px;
   --space-7: 96px;
 
-  /* רדיוסים וצללים */
-  --radius-card: 16px;
-  --radius-pill: 999px;
-  --shadow-soft: 0 8px 24px rgba(54, 47, 40, 0.08);
-  --shadow-card: 0 4px 16px rgba(54, 47, 40, 0.06);
+  /* רדיוסים — כרטיסים רחבים מול כפתורים חדים (הגיאומטריה החתומה של המערכת) */
+  --radius-button: 6px;
+  --radius-badge: 10px;
+  --radius-card: 24px;
 
   --container-max: 1180px;
 }
@@ -45,8 +52,8 @@
 body {
   margin: 0;
   font-family: var(--font-body);
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--color-canvas);
+  color: var(--color-graphite);
   font-size: 16px;
   line-height: 1.6;
   direction: rtl;
@@ -70,21 +77,22 @@ a {
 
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
+  font-weight: 500;
   line-height: 1.2;
   margin: 0 0 var(--space-2);
-  color: var(--color-text);
+  color: var(--color-graphite);
 }
 
 h1 { font-size: clamp(2.1rem, 4.5vw, 3.4rem); }
 h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
-h3 { font-size: 1.25rem; }
+h3 { font-size: 1.2rem; font-weight: 500; }
 
 p { margin: 0 0 var(--space-2); }
 
 .eyebrow {
-  font-size: 0.95rem;
-  color: var(--color-sage-dark);
-  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-iris);
+  font-weight: 500;
   letter-spacing: 0.02em;
   margin-bottom: var(--space-1);
 }
@@ -92,7 +100,8 @@ p { margin: 0 0 var(--space-2); }
 .script-accent {
   font-family: var(--font-heading);
   font-style: italic;
-  color: var(--color-terracotta-dark);
+  font-weight: 500;
+  color: var(--color-iris);
   display: block;
 }
 
@@ -101,10 +110,10 @@ p { margin: 0 0 var(--space-2); }
   position: absolute;
   right: var(--space-2);
   top: -60px;
-  background: var(--color-sage-dark);
+  background: var(--color-graphite);
   color: #fff;
   padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-badge);
   z-index: 1000;
   transition: top 0.2s ease;
 }
@@ -116,13 +125,15 @@ p { margin: 0 0 var(--space-2); }
 a:focus-visible,
 button:focus-visible,
 .nav-link:focus-visible {
-  outline: 3px solid var(--color-focus);
+  outline: 3px solid var(--color-iris-focus);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
 /* ==========================================================================
-   כפתורים
+   כפתורים — ללא מילוי כברירת מחדל; המבטא היחיד הוא Iris Violet.
+   חריגה מודעת: כפתור ה-CTA העיקרי (יצירת קשר) כן מלא, כי זהו עמוד לידים
+   ולא חנות — הפעולה החשובה בעמוד צריכה לבלוט.
    ========================================================================== */
 
 .btn {
@@ -131,39 +142,33 @@ button:focus-visible,
   gap: 8px;
   font-family: var(--font-body);
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   padding: 14px 28px;
-  border-radius: var(--radius-pill);
-  border: 2px solid transparent;
+  border-radius: var(--radius-button);
+  border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   min-height: 48px;
   line-height: 1;
 }
-.btn:active { transform: scale(0.98); }
 
 .btn-primary {
-  background: var(--color-terracotta);
+  background: var(--color-iris);
+  border-color: var(--color-iris);
   color: #fff;
 }
-.btn-primary:hover { background: var(--color-terracotta-dark); }
+.btn-primary:hover { background: var(--color-iris-focus); border-color: var(--color-iris-focus); }
 
 .btn-secondary {
   background: transparent;
-  border-color: var(--color-text);
-  color: var(--color-text);
+  border-color: var(--color-iris);
+  color: var(--color-iris);
 }
 .btn-secondary:hover {
-  background: var(--color-text);
-  color: #fff;
+  border-color: var(--color-graphite);
+  color: var(--color-graphite);
 }
-
-.btn-sage {
-  background: var(--color-sage);
-  color: #fff;
-}
-.btn-sage:hover { background: var(--color-sage-dark); }
 
 .btn-small {
   padding: 10px 20px;
@@ -172,16 +177,15 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   הדר / ניווט
+   הדר / ניווט — קו דק ושקט, ללא רקע כבד וללא צל
    ========================================================================== */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(251, 243, 236, 0.92);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--color-border);
+  background: var(--color-canvas);
+  border-bottom: 1px solid var(--color-lavender);
 }
 
 .nav-wrap {
@@ -197,12 +201,12 @@ button:focus-visible,
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--color-text);
+  color: var(--color-graphite);
 }
 .brand-name {
   font-family: var(--font-heading);
   font-size: 1.15rem;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.1;
 }
 .brand-sub {
@@ -216,11 +220,12 @@ button:focus-visible,
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background: var(--color-bg-alt);
+  background: var(--color-lavender-tint);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  color: var(--color-iris);
 }
 
 .main-nav {
@@ -237,16 +242,17 @@ button:focus-visible,
 }
 .nav-link {
   text-decoration: none;
-  color: var(--color-text);
-  font-size: 0.98rem;
+  color: var(--color-charcoal);
+  font-size: 0.95rem;
+  font-weight: 400;
   padding-bottom: 4px;
-  border-bottom: 2px solid transparent;
+  border-bottom: 1px solid transparent;
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 .nav-link:hover,
 .nav-link.is-active {
-  color: var(--color-sage-dark);
-  border-color: var(--color-sage);
+  color: var(--color-iris);
+  border-color: var(--color-iris);
 }
 
 .nav-toggle {
@@ -264,8 +270,8 @@ button:focus-visible,
   content: "";
   display: block;
   width: 24px;
-  height: 2px;
-  background: var(--color-text);
+  height: 1.5px;
+  background: var(--color-graphite);
   margin: 6px auto;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
@@ -284,8 +290,8 @@ button:focus-visible,
   align-items: center;
 }
 .hero-text .lead {
-  font-size: 1.15rem;
-  color: var(--color-text-soft);
+  font-size: 1.1rem;
+  color: var(--color-charcoal);
   max-width: 46ch;
 }
 .hero-actions {
@@ -296,9 +302,9 @@ button:focus-visible,
 }
 .hero-media {
   position: relative;
-  border-radius: 32px;
+  border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-lavender);
   aspect-ratio: 4/5;
 }
 .hero-media img {
@@ -315,9 +321,9 @@ button:focus-visible,
   align-items: center;
 }
 .page-hero-media {
-  border-radius: 24px;
+  border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-lavender);
   aspect-ratio: 4/3;
 }
 .page-hero-media img {
@@ -329,12 +335,12 @@ button:focus-visible,
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--color-sage-dark);
+  color: var(--color-iris);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: var(--space-2);
 }
-.back-link:hover { text-decoration: underline; }
+.back-link:hover { color: var(--color-graphite); }
 
 /* ==========================================================================
    סקשן כללי
@@ -344,7 +350,10 @@ button:focus-visible,
   padding-block: var(--space-6);
 }
 .section-alt {
-  background: var(--color-bg-alt);
+  background: var(--color-blush);
+}
+#faq.section-alt {
+  background: var(--color-warm-ash-tint);
 }
 .section-head {
   text-align: center;
@@ -354,7 +363,7 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   כרטיסי שירות
+   כרטיסי שירות — כרטיס רחב ברדיוס נדיב, גבול דק, ללא צל
    ========================================================================== */
 
 .services-grid {
@@ -363,15 +372,14 @@ button:focus-visible,
   gap: var(--space-3);
 }
 .service-card {
-  background: var(--color-card);
+  background: var(--color-white);
   border-radius: var(--radius-card);
   padding: var(--space-3);
   text-align: center;
   text-decoration: none;
-  color: var(--color-text);
-  box-shadow: var(--shadow-card);
-  border: 1px solid var(--color-border);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--color-graphite);
+  border: 1px solid var(--color-lavender);
+  transition: border-color 0.2s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -379,19 +387,19 @@ button:focus-visible,
 }
 .service-card:hover,
 .service-card:focus-visible {
+  border-color: var(--color-iris);
   transform: translateY(-4px);
-  box-shadow: var(--shadow-soft);
 }
 .service-icon {
-  width: 68px;
-  height: 68px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  background: var(--color-bg-alt);
+  background: var(--color-lavender-tint);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: var(--space-2);
-  color: var(--color-sage-dark);
+  color: var(--color-iris);
 }
 .service-card h3 {
   margin-bottom: 6px;
@@ -405,24 +413,25 @@ button:focus-visible,
   position: absolute;
   top: 12px;
   left: 12px;
-  background: var(--color-sage);
+  background: var(--color-iris);
   color: #fff;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   padding: 4px 10px;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-badge);
 }
 
 .quote-line {
   text-align: center;
-  color: var(--color-terracotta-dark);
+  color: var(--color-iris);
   font-family: var(--font-heading);
+  font-style: italic;
   font-size: 1.05rem;
   margin-top: var(--space-4);
 }
 
 /* ==========================================================================
-   מי אני
+   מי אני — סקשן אטמוספרי על גבי גוון Blush
    ========================================================================== */
 
 .about-grid {
@@ -432,9 +441,9 @@ button:focus-visible,
   align-items: center;
 }
 .about-media {
-  border-radius: 24px;
+  border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(0,0,0,0.08);
   aspect-ratio: 4/5;
 }
 .about-media img {
@@ -443,7 +452,7 @@ button:focus-visible,
   object-fit: cover;
 }
 .about-text .lead {
-  color: var(--color-text-soft);
+  color: var(--color-charcoal);
 }
 
 /* ==========================================================================
@@ -461,22 +470,22 @@ button:focus-visible,
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  border: 1px solid var(--color-lavender);
   border-radius: var(--radius-card);
   padding: var(--space-2);
 }
 .includes-list .check {
   flex-shrink: 0;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: var(--color-sage);
+  background: var(--color-iris);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 /* ==========================================================================
@@ -498,17 +507,16 @@ button:focus-visible,
 .testimonial-card {
   flex: 0 0 100%;
   margin: 0;
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  border: 1px solid var(--color-lavender);
   border-radius: var(--radius-card);
   padding: var(--space-4);
   text-align: center;
-  box-shadow: var(--shadow-card);
 }
 .testimonial-quote-mark {
   font-family: var(--font-heading);
   font-size: 2.5rem;
-  color: var(--color-sage);
+  color: var(--color-iris);
   line-height: 1;
   display: block;
   margin-bottom: var(--space-1);
@@ -518,8 +526,8 @@ button:focus-visible,
   margin-bottom: var(--space-2);
 }
 .testimonial-author {
-  color: var(--color-terracotta-dark);
-  font-weight: 600;
+  color: var(--color-iris);
+  font-weight: 500;
   font-style: normal;
 }
 .testimonial-dots {
@@ -529,19 +537,18 @@ button:focus-visible,
   margin-top: var(--space-3);
 }
 .testimonial-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: none;
-  background: var(--color-border);
+  border: 1px solid var(--color-lavender);
+  background: transparent;
   cursor: pointer;
   padding: 0;
 }
-.testimonial-dot.is-active {
-  background: var(--color-sage);
-}
+.testimonial-dot.is-active,
 .testimonial-dot[aria-current="true"] {
-  background: var(--color-sage);
+  background: var(--color-iris);
+  border-color: var(--color-iris);
 }
 
 /* ==========================================================================
@@ -555,8 +562,8 @@ button:focus-visible,
   gap: var(--space-2);
 }
 .faq-item {
-  background: var(--color-card);
-  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  border: 1px solid var(--color-lavender);
   border-radius: var(--radius-card);
   overflow: hidden;
 }
@@ -568,16 +575,17 @@ button:focus-visible,
   cursor: pointer;
   font-family: var(--font-body);
   font-size: 1.02rem;
-  font-weight: 600;
+  font-weight: 500;
   padding: var(--space-2) var(--space-3);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-2);
-  color: var(--color-text);
+  color: var(--color-graphite);
 }
 .faq-icon {
   flex-shrink: 0;
+  color: var(--color-iris);
   transition: transform 0.2s ease;
 }
 .faq-question[aria-expanded="true"] .faq-icon {
@@ -588,7 +596,7 @@ button:focus-visible,
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.25s ease, padding 0.25s ease;
-  color: var(--color-text-soft);
+  color: var(--color-charcoal);
 }
 .faq-answer[data-open="true"] {
   padding-bottom: var(--space-2);
@@ -596,21 +604,21 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   באנר CTA
+   באנר CTA — כרטיס Blush גדול, טקסט כהה לניגודיות
    ========================================================================== */
 
 .cta-banner {
-  background: var(--color-sage);
-  color: #fff;
-  border-radius: 28px;
+  background: var(--color-blush);
+  color: var(--color-graphite);
+  border-radius: 32px;
   padding: var(--space-5);
   text-align: center;
 }
 .cta-banner h2 {
-  color: #fff;
+  color: var(--color-graphite);
 }
 .cta-banner p {
-  color: rgba(255,255,255,0.9);
+  color: var(--color-charcoal);
 }
 .cta-actions {
   display: flex;
@@ -619,20 +627,13 @@ button:focus-visible,
   flex-wrap: wrap;
   margin-top: var(--space-2);
 }
-.cta-banner .btn-primary {
-  background: #fff;
-  color: var(--color-sage-dark);
-}
-.cta-banner .btn-primary:hover {
-  background: var(--color-bg-alt);
-}
 .cta-banner .btn-secondary {
-  border-color: #fff;
-  color: #fff;
+  border-color: var(--color-graphite);
+  color: var(--color-graphite);
 }
 .cta-banner .btn-secondary:hover {
-  background: #fff;
-  color: var(--color-sage-dark);
+  background: var(--color-graphite);
+  color: #fff;
 }
 
 /* ==========================================================================
@@ -641,7 +642,7 @@ button:focus-visible,
 
 .site-footer {
   padding-block: var(--space-4);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-lavender);
   text-align: center;
   color: var(--color-text-soft);
   font-size: 0.9rem;
@@ -656,16 +657,16 @@ button:focus-visible,
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--color-bg-alt);
+  background: var(--color-lavender-tint);
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--color-text);
-  transition: background-color 0.2s ease;
+  color: var(--color-graphite);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 .footer-social a:hover {
-  background: var(--color-sage);
+  background: var(--color-iris);
   color: #fff;
 }
 
@@ -695,9 +696,9 @@ button:focus-visible,
     position: absolute;
     top: 100%;
     inset-inline: 0;
-    background: var(--color-bg);
+    background: var(--color-canvas);
     padding: var(--space-2) var(--space-3) var(--space-3);
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-lavender);
     gap: var(--space-2);
   }
 }
