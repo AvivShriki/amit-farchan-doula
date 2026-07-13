@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNavToggle();
   initTestimonials();
-  initFaq();
   initScrollReveal();
 });
 
@@ -103,16 +102,4 @@ function initTestimonials() {
 
   root.addEventListener('mouseenter', () => timer && clearInterval(timer));
   root.addEventListener('mouseleave', resetTimer);
-}
-
-function initFaq() {
-  const items = document.querySelectorAll('.faq-question');
-  items.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const answer = document.getElementById(btn.getAttribute('aria-controls'));
-      const isOpen = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!isOpen));
-      if (answer) answer.setAttribute('data-open', String(!isOpen));
-    });
-  });
 }

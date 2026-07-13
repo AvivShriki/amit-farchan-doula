@@ -480,73 +480,6 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   כרטיסי שירות
-   ========================================================================== */
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-3);
-}
-.service-card {
-  background: var(--color-white);
-  border-radius: var(--radius-card);
-  padding: var(--space-3);
-  text-align: center;
-  text-decoration: none;
-  color: var(--color-text);
-  box-shadow: var(--shadow-card);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-.service-card:hover,
-.service-card:focus-visible {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-soft);
-}
-.service-icon {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: var(--color-cream-panel);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: var(--space-2);
-  color: var(--color-text);
-}
-.service-card h3 {
-  margin-bottom: 6px;
-}
-.service-card p {
-  font-size: 0.92rem;
-  color: var(--color-text-soft);
-  margin-bottom: 0;
-}
-.service-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: var(--color-olive);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-}
-
-.quote-line {
-  text-align: center;
-  color: var(--color-taupe-deep);
-  font-family: var(--font-secondary);
-  font-size: 1.3rem;
-  margin-top: var(--space-4);
-}
-
-/* ==========================================================================
    תהליך העבודה — צעדים ממוספרים עם קו מחבר
    ========================================================================== */
 
@@ -791,58 +724,6 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   שאלות נפוצות
-   ========================================================================== */
-
-.faq-list {
-  max-width: 720px;
-  margin-inline: auto;
-  display: grid;
-  gap: var(--space-2);
-}
-.faq-item {
-  background: var(--color-white);
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-}
-.faq-question {
-  width: 100%;
-  text-align: right;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-body);
-  font-size: 1.02rem;
-  font-weight: 600;
-  padding: var(--space-2) var(--space-3);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-2);
-  color: var(--color-text);
-}
-.faq-icon {
-  flex-shrink: 0;
-  color: var(--color-taupe-deep);
-  transition: transform 0.2s ease;
-}
-.faq-question[aria-expanded="true"] .faq-icon {
-  transform: rotate(45deg);
-}
-.faq-answer {
-  padding: 0 var(--space-3);
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.25s ease, padding 0.25s ease;
-  color: var(--color-text-soft);
-}
-.faq-answer[data-open="true"] {
-  padding-bottom: var(--space-2);
-  max-height: 400px;
-}
-
-/* ==========================================================================
    באנר CTA — תמונה + טקסט, כמו סקשן הסיום במוקאפ הייחוס
    ========================================================================== */
 
@@ -999,7 +880,6 @@ button:focus-visible,
     color: var(--color-text);
   }
 
-  .services-grid,
   .process-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1024,7 +904,6 @@ button:focus-visible,
 }
 
 @media (max-width: 560px) {
-  .services-grid,
   .process-grid {
     grid-template-columns: 1fr 1fr;
     gap: var(--space-2);
