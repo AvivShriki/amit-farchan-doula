@@ -7,6 +7,14 @@
    בכיבוד prefers-reduced-motion.
    ========================================================================== */
 
+@font-face {
+  font-family: 'Gveret Levin';
+  src: url('../font/GveretLevin-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* צבעים — קנבס */
   --color-cream: #FAF6EE;
@@ -30,6 +38,7 @@
   /* טיפוגרפיה */
   --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
   --font-body: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-script: 'Gveret Levin', var(--font-heading);
 
   /* ריווח (סקאלה של 8px) */
   --space-1: 8px;
@@ -102,9 +111,11 @@ p { margin: 0 0 var(--space-2); }
 }
 
 .script-accent {
-  font-family: var(--font-heading);
-  font-style: italic;
-  font-weight: 500;
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.5em;
+  line-height: 1.3;
   color: var(--color-taupe-deep);
   display: block;
 }
@@ -511,9 +522,8 @@ button:focus-visible,
 .quote-line {
   text-align: center;
   color: var(--color-taupe-deep);
-  font-family: var(--font-heading);
-  font-style: italic;
-  font-size: 1.05rem;
+  font-family: var(--font-script);
+  font-size: 1.4rem;
   margin-top: var(--space-4);
 }
 
