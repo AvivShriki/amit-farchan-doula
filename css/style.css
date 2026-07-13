@@ -1,29 +1,31 @@
 /* ==========================================================================
    עמית פרחן — דולה מוסמכת | Design tokens + מערכת רכיבים
-   קנבס קרם חם, מבטאים של סיג'-ירוק ורוז-חימר, כרטיסים עגולים עם צל רך,
-   כפתורי פיל, אייקוני קו דק, ובועות-דיבור להמלצות — בהשראת מוקאפ הייחוס
-   שהלקוחה אהבה. תנועה עדינה בסקרול ובכניסת ההירו, בכיבוד prefers-reduced-motion.
+   פלטת המותג נשאבה ישירות מחומרי השיווק של הלקוחה (זית-סאג' + טופ חם) —
+   ולא הומצאה — לפי בקשתה המפורשת לשמור על הצבעים שמייצגים אותה. כרטיסים
+   עגולים עם צל רך, כפתורי פיל, אייקוני קו דק, ובועות-דיבור להמלצות —
+   בהשראת מוקאפ הייחוס שהלקוחה אהבה. תנועה עדינה בסקרול ובכניסת ההירו,
+   בכיבוד prefers-reduced-motion.
    ========================================================================== */
 
 :root {
   /* צבעים — קנבס */
-  --color-cream: #FBF1E6;
-  --color-cream-panel: #F4E4D6;
+  --color-cream: #FAF6EE;
+  --color-cream-panel: #F1E9DC;
   --color-white: #FFFFFF;
 
-  /* צבעים — מבטאים */
-  --color-sage: #7E9172;
-  --color-sage-dark: #64765A;
-  --color-sage-tint: #E9EEE2;
-  --color-rose: #BD8268;
-  --color-rose-dark: #A0694F;
-  --color-rose-tint: #F6E2D9;
-  --color-cream-tint: #FBF3EC;
+  /* צבעים — מבטאים (נשאבו מחומרי המותג של הלקוחה) */
+  --color-olive: #6E6640;
+  --color-olive-deep: #58502F;
+  --color-olive-tint: #E7E1B4;
+  --color-taupe: #786A5A;
+  --color-taupe-deep: #5F5347;
+  --color-taupe-tint: #E7DCCF;
+  --color-cream-tint: #F8F2E6;
 
   /* צבעים — טקסט וגבולות */
-  --color-text: #3B322B;
-  --color-text-soft: #7A6F63;
-  --color-border: #EAD9C7;
+  --color-text: #2E2822;
+  --color-text-soft: #756C60;
+  --color-border: #E5DAC8;
 
   /* טיפוגרפיה */
   --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
@@ -93,7 +95,7 @@ p { margin: 0 0 var(--space-2); }
 
 .eyebrow {
   font-size: 0.9rem;
-  color: var(--color-sage-dark);
+  color: var(--color-olive-deep);
   font-weight: 600;
   letter-spacing: 0.02em;
   margin-bottom: var(--space-1);
@@ -103,12 +105,12 @@ p { margin: 0 0 var(--space-2); }
   font-family: var(--font-heading);
   font-style: italic;
   font-weight: 500;
-  color: var(--color-rose-dark);
+  color: var(--color-taupe-deep);
   display: block;
 }
 
 .heart-doodle {
-  color: var(--color-rose);
+  color: var(--color-taupe);
   margin-block: var(--space-2);
   animation: bob 4s ease-in-out infinite;
 }
@@ -133,7 +135,7 @@ p { margin: 0 0 var(--space-2); }
 a:focus-visible,
 button:focus-visible,
 .nav-link:focus-visible {
-  outline: 3px solid var(--color-sage-dark);
+  outline: 3px solid var(--color-olive-deep);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -162,11 +164,11 @@ button:focus-visible,
 .btn:active { transform: translateY(0) scale(0.98); }
 
 .btn-primary {
-  background: var(--color-rose);
+  background: var(--color-taupe);
   color: #fff;
   box-shadow: var(--shadow-card);
 }
-.btn-primary:hover { background: var(--color-rose-dark); }
+.btn-primary:hover { background: var(--color-taupe-deep); }
 
 .btn-secondary {
   background: transparent;
@@ -234,7 +236,7 @@ button:focus-visible,
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--color-rose-dark);
+  color: var(--color-taupe-deep);
 }
 
 .main-nav {
@@ -259,8 +261,8 @@ button:focus-visible,
 }
 .nav-link:hover,
 .nav-link.is-active {
-  color: var(--color-sage-dark);
-  border-color: var(--color-sage);
+  color: var(--color-olive-deep);
+  border-color: var(--color-olive);
 }
 
 .nav-toggle {
@@ -344,7 +346,7 @@ button:focus-visible,
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--color-sage-dark);
+  color: var(--color-olive-deep);
   text-decoration: none;
   font-weight: 600;
   margin-bottom: var(--space-2);
@@ -498,7 +500,7 @@ button:focus-visible,
   position: absolute;
   top: 12px;
   left: 12px;
-  background: var(--color-sage);
+  background: var(--color-olive);
   color: #fff;
   font-size: 0.7rem;
   font-weight: 700;
@@ -508,7 +510,7 @@ button:focus-visible,
 
 .quote-line {
   text-align: center;
-  color: var(--color-rose-dark);
+  color: var(--color-taupe-deep);
   font-family: var(--font-heading);
   font-style: italic;
   font-size: 1.05rem;
@@ -541,7 +543,7 @@ button:focus-visible,
   height: 44px;
   margin: 0 auto var(--space-2);
   border-radius: 50%;
-  background: var(--color-sage);
+  background: var(--color-olive);
   color: #fff;
   font-family: var(--font-heading);
   font-size: 1.1rem;
@@ -620,7 +622,7 @@ button:focus-visible,
   display: block;
   font-family: var(--font-heading);
   font-size: 1.6rem;
-  color: var(--color-rose-dark);
+  color: var(--color-taupe-deep);
 }
 .stat span {
   font-size: 0.82rem;
@@ -652,7 +654,7 @@ button:focus-visible,
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--color-sage);
+  background: var(--color-olive);
   color: #fff;
   display: flex;
   align-items: center;
@@ -699,15 +701,15 @@ button:focus-visible,
   box-shadow: 4px 4px 6px -4px rgba(59, 50, 43, 0.12);
 }
 .testimonial-slides > .testimonial-card:nth-child(3n+2) {
-  background: var(--color-sage-tint);
+  background: var(--color-olive-tint);
 }
 .testimonial-slides > .testimonial-card:nth-child(3n+3) {
-  background: var(--color-rose-tint);
+  background: var(--color-taupe-tint);
 }
 .testimonial-quote-mark {
   font-family: var(--font-heading);
   font-size: 2.5rem;
-  color: var(--color-rose);
+  color: var(--color-taupe);
   line-height: 1;
   display: block;
   margin-bottom: var(--space-1);
@@ -739,7 +741,7 @@ button:focus-visible,
 }
 .testimonial-dot.is-active,
 .testimonial-dot[aria-current="true"] {
-  background: var(--color-sage);
+  background: var(--color-olive);
   transform: scale(1.15);
 }
 
@@ -777,7 +779,7 @@ button:focus-visible,
 }
 .faq-icon {
   flex-shrink: 0;
-  color: var(--color-rose-dark);
+  color: var(--color-taupe-deep);
   transition: transform 0.2s ease;
 }
 .faq-question[aria-expanded="true"] .faq-icon {
@@ -817,7 +819,7 @@ button:focus-visible,
 .cta-media {
   border-radius: var(--radius-card);
   overflow: hidden;
-  aspect-ratio: 4/3;
+  aspect-ratio: 3/4;
 }
 .cta-media img {
   width: 100%;
@@ -868,7 +870,7 @@ button:focus-visible,
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 .footer-social a:hover {
-  background: var(--color-sage);
+  background: var(--color-olive);
   color: #fff;
 }
 
