@@ -8,9 +8,16 @@
    ========================================================================== */
 
 @font-face {
-  font-family: 'Gveret Levin';
-  src: url('../font/GveretLevin-Regular.ttf') format('truetype');
+  font-family: 'Playpen Sans Hebrew';
+  src: url('../font/PlaypenSansHebrew-Regular.ttf') format('truetype');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playpen Sans Hebrew';
+  src: url('../font/PlaypenSansHebrew-SemiBold.ttf') format('truetype');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
@@ -38,7 +45,7 @@
   /* טיפוגרפיה */
   --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
   --font-body: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-script: 'Gveret Levin', var(--font-heading);
+  --font-secondary: 'Playpen Sans Hebrew', var(--font-heading);
 
   /* ריווח (סקאלה של 8px) */
   --space-1: 8px;
@@ -103,15 +110,15 @@ h3 { font-size: 1.2rem; font-weight: 500; }
 p { margin: 0 0 var(--space-2); }
 
 .eyebrow {
-  font-size: 0.9rem;
+  font-family: var(--font-secondary);
+  font-size: 1.05rem;
   color: var(--color-olive-deep);
   font-weight: 600;
-  letter-spacing: 0.02em;
   margin-bottom: var(--space-1);
 }
 
 .script-accent {
-  font-family: var(--font-script);
+  font-family: var(--font-secondary);
   font-style: normal;
   font-weight: 400;
   font-size: clamp(1.6rem, 2.6vw, 2.1rem);
@@ -416,6 +423,10 @@ button:focus-visible,
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
+@keyframes heroKenBurns {
+  from { transform: scale(1); }
+  to { transform: scale(1.09); }
+}
 
 /* ==========================================================================
    אנימציית סקרול — עדינה, חד-פעמית, מכבדת prefers-reduced-motion
@@ -437,6 +448,7 @@ button:focus-visible,
 @media (prefers-reduced-motion: reduce) {
   .hero-text > *,
   .hero-media,
+  .hero-media img,
   .page-hero-text > *,
   .page-hero-media,
   .reveal {
@@ -529,8 +541,8 @@ button:focus-visible,
 .quote-line {
   text-align: center;
   color: var(--color-taupe-deep);
-  font-family: var(--font-script);
-  font-size: 1.4rem;
+  font-family: var(--font-secondary);
+  font-size: 1.3rem;
   margin-top: var(--space-4);
 }
 
@@ -740,7 +752,7 @@ button:focus-visible,
   background: var(--color-taupe-tint);
 }
 .testimonial-quote-mark {
-  font-family: var(--font-heading);
+  font-family: var(--font-secondary);
   font-size: 2.5rem;
   color: var(--color-taupe);
   line-height: 1;
@@ -912,7 +924,6 @@ button:focus-visible,
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .hero-grid,
   .page-hero,
   .about-grid,
   .cta-banner--split {
@@ -924,9 +935,70 @@ button:focus-visible,
   .cta-banner--split .cta-actions {
     justify-content: center;
   }
-  .hero-media,
   .page-hero-media,
   .cta-media { order: -1; }
+
+  /* הירו הבית — תמונה מלאה-לרוחב עם הטקסט עולה עליה, במקום שני בלוקים נפרדים */
+  .hero {
+    padding: 0;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: block;
+    position: relative;
+    min-height: 620px;
+  }
+  .hero-media {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(-1 * var(--space-3));
+    right: calc(-1 * var(--space-3));
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    aspect-ratio: auto;
+    box-shadow: none;
+    z-index: 0;
+  }
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(25, 19, 14, 0.9) 0%, rgba(25, 19, 14, 0.62) 55%, rgba(25, 19, 14, 0) 88%);
+    pointer-events: none;
+  }
+  .hero-media img {
+    object-position: center 22%;
+    animation: heroKenBurns 9s ease-out forwards;
+  }
+  .hero-text {
+    position: relative;
+    z-index: 1;
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-3) var(--space-3) var(--space-5);
+  }
+  .hero-text .eyebrow,
+  .hero-text .lead {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .hero-text h1,
+  .hero-text .script-accent,
+  .hero-text .heart-doodle {
+    color: #fff;
+  }
+  .hero-text .btn-secondary {
+    border-color: #fff;
+    color: #fff;
+  }
+  .hero-text .btn-secondary:hover {
+    background: #fff;
+    color: var(--color-text);
+  }
+
   .services-grid,
   .process-grid {
     grid-template-columns: repeat(2, 1fr);
