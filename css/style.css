@@ -7,21 +7,6 @@
    בכיבוד prefers-reduced-motion.
    ========================================================================== */
 
-@font-face {
-  font-family: 'Playpen Sans Hebrew';
-  src: url('../font/PlaypenSansHebrew-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Playpen Sans Hebrew';
-  src: url('../font/PlaypenSansHebrew-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* צבעים — קנבס */
   --color-cream: #FAF6EE;
@@ -42,10 +27,10 @@
   --color-text-soft: #756C60;
   --color-border: #E5DAC8;
 
-  /* טיפוגרפיה */
+  /* טיפוגרפיה — 2 פונטים בלבד באתר כולו */
   --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
   --font-body: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-secondary: 'Playpen Sans Hebrew', var(--font-heading);
+  --font-secondary: var(--font-heading);
 
   /* ריווח (סקאלה של 8px) */
   --space-1: 8px;
@@ -110,16 +95,16 @@ h3 { font-size: 1.2rem; font-weight: 500; }
 p { margin: 0 0 var(--space-2); }
 
 .eyebrow {
-  font-family: var(--font-secondary);
-  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
   color: var(--color-olive-deep);
   font-weight: 600;
   margin-bottom: var(--space-1);
 }
 
 .script-accent {
-  font-family: var(--font-secondary);
-  font-style: normal;
+  font-family: var(--font-heading);
+  font-style: italic;
   font-weight: 400;
   font-size: clamp(1.6rem, 2.6vw, 2.1rem);
   line-height: 1.4;
@@ -517,19 +502,8 @@ button:focus-visible,
 .service-card:focus-visible img {
   transform: scale(1.06);
 }
-/* שכבת האפלה עדינה כדי שהכותרת תקרא בלי להסתיר את התמונה */
-.service-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(25, 19, 14, 0.3);
-  transition: background 0.3s ease;
-}
-.service-card:hover::after,
-.service-card:focus-visible::after {
-  background: rgba(25, 19, 14, 0.42);
-}
-/* כותרת הקטגוריה — ממורכזת במרכז מסגרת התמונה, שקופה-בולטת */
+/* כותרת הקטגוריה — תווית "זכוכית" שקופה ממורכזת במרכז מסגרת התמונה,
+   בלי שכבת האפלה שמסתירה את התמונה */
 .service-card h3 {
   position: absolute;
   inset: 0;
@@ -542,12 +516,24 @@ button:focus-visible,
   padding: var(--space-1);
   font-size: clamp(1rem, 1.6vw, 1.2rem);
   letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
   /* כניסה מדורגת — הכותרות צפות פנימה כשהסקשן נחשף */
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.service-card h3 span {
+  display: inline-block;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(250, 246, 238, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--color-text);
+  transition: background 0.3s ease;
+}
+.service-card:hover h3 span,
+.service-card:focus-visible h3 span {
+  background: rgba(250, 246, 238, 0.65);
 }
 .services-grid.is-visible .service-card:nth-child(1) h3 { transition-delay: 0.15s; }
 .services-grid.is-visible .service-card:nth-child(2) h3 { transition-delay: 0.3s; }
@@ -936,8 +922,8 @@ button:focus-visible,
   .page-hero-media,
   .cta-media { order: -1; }
 
-  /* הירו הבית במובייל — הטקסט על רקע נקי מעל התמונה (לא מסתיר את עמית),
-     והכפתור מעוגן בתחתית התמונה, על אזור הרצפה הפנוי */
+  /* הירו הבית במובייל — הטקסט בתוך התמונה, על רצועת הווילון הבהירה
+     שבצד ימין (לא על הגוף של עמית), והכפתור מעוגן בתחתית התמונה */
   .hero {
     padding: 0;
     overflow: hidden;
@@ -945,33 +931,52 @@ button:focus-visible,
   .hero-grid {
     display: block;
     position: relative;
+    min-height: 640px;
+  }
+  .hero-media {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(-1 * var(--space-3));
+    right: calc(-1 * var(--space-3));
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    aspect-ratio: auto;
+    box-shadow: none;
+    z-index: 0;
+  }
+  .hero-media img {
+    object-position: center;
+    animation: heroKenBurns 9s ease-out forwards;
   }
   .hero-text {
-    text-align: center;
-    padding: var(--space-4) var(--space-2) var(--space-3);
+    position: relative;
+    z-index: 1;
+    min-height: 640px;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-3) 0;
+  }
+  /* הטקסט מוגבל לרצועת הווילון הבהירה בצד ימין של התמונה,
+     עם הילה בהירה עדינה לקריאות מעל התמונה */
+  .hero-text .eyebrow,
+  .hero-text h1,
+  .hero-text .lead {
+    max-width: 55%;
+    text-shadow: 0 0 16px rgba(250, 246, 238, 0.95), 0 0 4px rgba(250, 246, 238, 0.8);
+  }
+  .hero-text h1 {
+    font-size: 1.9rem;
+  }
+  .hero-text .script-accent {
+    font-size: 1.4rem;
   }
   .hero-text .lead {
-    margin-inline: auto;
-    font-size: 1.05rem;
+    font-size: 0.98rem;
   }
   .hero-text .heart-doodle {
     display: none;
-  }
-  .hero-media {
-    margin-inline: calc(-1 * var(--space-3));
-    border-radius: 0;
-    aspect-ratio: 2 / 3;
-    box-shadow: none;
-  }
-  .hero-media::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(25, 19, 14, 0.6) 0%, rgba(25, 19, 14, 0) 34%);
-    pointer-events: none;
-  }
-  .hero-media img {
-    animation: heroKenBurns 9s ease-out forwards;
   }
   .hero-actions {
     position: absolute;
