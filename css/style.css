@@ -27,10 +27,10 @@
   --color-text-soft: #756C60;
   --color-border: #E5DAC8;
 
-  /* טיפוגרפיה — 2 פונטים בלבד באתר כולו */
+  /* טיפוגרפיה — מערכת אחידה בכל האתר:
+     כותרות בפונט המהודר, כל טקסט רץ בפונט הגוף */
   --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
   --font-body: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-secondary: var(--font-heading);
 
   /* ריווח (סקאלה של 8px) */
   --space-1: 8px;
@@ -477,13 +477,12 @@ button:focus-visible,
   margin-inline: auto;
 }
 .service-card {
-  position: relative;
   display: block;
   text-decoration: none;
+  background: var(--color-white);
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  aspect-ratio: 1 / 1;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .service-card:hover,
@@ -493,47 +492,22 @@ button:focus-visible,
 }
 .service-card img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
 }
-.service-card:hover img,
-.service-card:focus-visible img {
-  transform: scale(1.06);
-}
-/* כותרת הקטגוריה — תווית "זכוכית" שקופה ממורכזת במרכז מסגרת התמונה,
-   בלי שכבת האפלה שמסתירה את התמונה */
+/* כותרת הקטגוריה — פס כיתוב מתחת לתמונה, לא מסתיר אותה כלל */
 .service-card h3 {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   margin: 0;
-  padding: var(--space-1);
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
-  letter-spacing: 0.02em;
+  padding: 12px 10px 16px;
+  text-align: center;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  color: var(--color-text);
   /* כניסה מדורגת — הכותרות צפות פנימה כשהסקשן נחשף */
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.service-card h3 span {
-  display: inline-block;
-  padding: 9px 16px;
-  border-radius: var(--radius-pill);
-  background: rgba(250, 246, 238, 0.45);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: var(--color-text);
-  transition: background 0.3s ease;
-}
-.service-card:hover h3 span,
-.service-card:focus-visible h3 span {
-  background: rgba(250, 246, 238, 0.65);
 }
 .services-grid.is-visible .service-card:nth-child(1) h3 { transition-delay: 0.15s; }
 .services-grid.is-visible .service-card:nth-child(2) h3 { transition-delay: 0.3s; }
@@ -551,14 +525,14 @@ button:focus-visible,
   position: relative;
 }
 .services-quote p {
-  font-family: var(--font-heading);
-  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
   line-height: 1.7;
   color: var(--color-text);
   margin-bottom: var(--space-1);
 }
 .services-quote p:first-child {
-  font-family: var(--font-secondary);
+  font-weight: 600;
   color: var(--color-taupe-deep);
 }
 
@@ -788,7 +762,7 @@ button:focus-visible,
   background: var(--color-taupe-tint);
 }
 .testimonial-quote-mark {
-  font-family: var(--font-secondary);
+  font-family: var(--font-heading);
   font-size: 2.5rem;
   color: var(--color-taupe);
   line-height: 1;
@@ -950,6 +924,15 @@ button:focus-visible,
     object-position: center;
     animation: heroKenBurns 9s ease-out forwards;
   }
+  /* שכבת הבהרה עדינה בצד ימין — יוצרת רקע אחיד ובהיר מאחורי הטקסט
+     בלי להסתיר את עמית שנמצאת בצד שמאל */
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to left, rgba(250, 246, 238, 0.94) 0%, rgba(250, 246, 238, 0.72) 40%, rgba(250, 246, 238, 0) 66%);
+    pointer-events: none;
+  }
   .hero-text {
     position: relative;
     z-index: 1;
@@ -958,13 +941,15 @@ button:focus-visible,
     flex-direction: column;
     padding: var(--space-3) 0;
   }
-  /* הטקסט מוגבל לרצועת הווילון הבהירה בצד ימין של התמונה,
-     עם הילה בהירה עדינה לקריאות מעל התמונה */
+  /* הטקסט מוגבל לרצועה הימנית, מעל שכבת ההבהרה — כהה וקריא */
   .hero-text .eyebrow,
   .hero-text h1,
   .hero-text .lead {
     max-width: 55%;
-    text-shadow: 0 0 16px rgba(250, 246, 238, 0.95), 0 0 4px rgba(250, 246, 238, 0.8);
+  }
+  .hero-text h1,
+  .hero-text .lead {
+    color: var(--color-text);
   }
   .hero-text h1 {
     font-size: 1.9rem;
