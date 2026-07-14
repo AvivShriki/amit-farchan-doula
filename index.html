@@ -74,7 +74,11 @@
         </div>
       </div>
       <div class="hero-media">
-        <img src="assets/photos/hero-home.jpg" alt="עמית פרחן, בהריון, מחבקת בעדינות את בטנה" width="1064" height="1600" loading="eager">
+        <picture>
+          <!-- במובייל: גרסה עם קיר פנוי רחב בצד ימין, שמפנה מקום לטקסט -->
+          <source media="(max-width: 900px)" srcset="assets/photos/hero-home-mobile.jpg">
+          <img src="assets/photos/hero-home.jpg" alt="עמית פרחן, בהריון, מחבקת בעדינות את בטנה" width="1064" height="1600" loading="eager">
+        </picture>
       </div>
     </div>
   </section>
