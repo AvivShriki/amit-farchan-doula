@@ -7,6 +7,22 @@
    בכיבוד prefers-reduced-motion.
    ========================================================================== */
 
+/* פונט המבטא של ההירו — לפי הנחיית אביב (קבצים מקומיים בתיקיית font) */
+@font-face {
+  font-family: 'Playpen Sans Hebrew';
+  src: url('../font/PlaypenSansHebrew-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playpen Sans Hebrew';
+  src: url('../font/PlaypenSansHebrew-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* צבעים — קנבס */
   --color-cream: #FAF6EE;
@@ -29,9 +45,11 @@
   --color-border: #E5DAC8;
 
   /* טיפוגרפיה — מערכת אחידה בכל האתר:
-     כותרות בפונט המהודר, כל טקסט רץ בפונט הגוף */
+     כותרות בפונט המהודר, כל טקסט רץ בפונט הגוף,
+     ופונט מבטא ייחודי להירו בלבד */
   --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
   --font-body: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-accent: 'Playpen Sans Hebrew', var(--font-heading);
 
   /* ריווח (סקאלה של 8px) */
   --space-1: 8px;
@@ -300,8 +318,22 @@ button:focus-visible,
   gap: var(--space-5);
   align-items: center;
 }
-.hero-text .lead {
+/* טיפוגרפיית ההירו — פונט המבטא לפי הנחיית אביב:
+   הפתיח ב-SemiBold, הכותרת והפסקה ב-Regular */
+.hero-text .eyebrow {
+  font-family: var(--font-accent);
+  font-weight: 600;
   font-size: 1.15rem;
+}
+.hero-text h1 {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+  line-height: 1.35;
+}
+.hero-text .lead {
+  font-family: var(--font-accent);
+  font-size: 1.1rem;
   color: var(--color-text-soft);
   max-width: 46ch;
 }
@@ -937,18 +969,21 @@ button:focus-visible,
     flex-direction: column;
     padding: var(--space-3) 0;
   }
-  /* הטקסט על הקיר הפנוי בצד ימין של תמונת המובייל — כהה וקריא */
-  .hero-text .eyebrow,
+  /* הכותרת הראשית — ממורכזת למעלה, מעל עמית, על כל רוחב התמונה */
+  .hero-text .eyebrow {
+    max-width: none;
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: var(--space-3);
+  }
+  /* הכותרת והפסקה — לצד עמית, על הקיר הפנוי בצד ימין */
   .hero-text h1,
   .hero-text .lead {
     max-width: 58%;
-  }
-  .hero-text h1,
-  .hero-text .lead {
     color: var(--color-text);
   }
   .hero-text h1 {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
   .hero-text .lead {
     font-size: 1.02rem;
