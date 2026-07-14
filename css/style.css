@@ -24,7 +24,8 @@
 
   /* צבעים — טקסט וגבולות */
   --color-text: #2E2822;
-  --color-text-soft: #756C60;
+  /* 4.5:1 ומעלה גם על גבי cream-panel (דרישת WCAG AA לטקסט רגיל) */
+  --color-text-soft: #6B6257;
   --color-border: #E5DAC8;
 
   /* טיפוגרפיה — מערכת אחידה בכל האתר:
@@ -781,17 +782,21 @@ button:focus-visible,
 .testimonial-dots {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: var(--space-4);
+  gap: 0;
+  margin-top: var(--space-3);
 }
+/* הנקודה הנראית נשארת 12px, אבל שטח הלחיצה הוא 44x44 (מינימום מומלץ למגע) —
+   ה-padding שקוף והצבע נצבע רק על content-box */
 .testimonial-dot {
+  box-sizing: content-box;
   width: 12px;
   height: 12px;
+  padding: 16px;
   border-radius: 50%;
   border: none;
   background: var(--color-border);
+  background-clip: content-box;
   cursor: pointer;
-  padding: 0;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 .testimonial-dot.is-active,
@@ -875,6 +880,12 @@ button:focus-visible,
 .footer-social a:hover {
   background: var(--color-olive);
   color: #fff;
+}
+/* קישורי טלפון ומייל — הגדלת שטח המגע בלי לשבור את זרימת הטקסט */
+.site-footer p a {
+  display: inline-block;
+  padding: 12px 8px;
+  margin-block: -8px;
 }
 
 /* ==========================================================================
