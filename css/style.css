@@ -103,17 +103,6 @@ p { margin: 0 0 var(--space-2); }
   margin-bottom: var(--space-1);
 }
 
-.script-accent {
-  font-family: var(--font-heading);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-  line-height: 1.4;
-  color: var(--color-taupe-deep);
-  display: block;
-  margin-bottom: 2px;
-}
-
 .heart-doodle {
   color: var(--color-taupe);
   margin-block: var(--space-2);
@@ -960,9 +949,6 @@ button:focus-visible,
   }
   .hero-text h1 {
     font-size: 2rem;
-  }
-  .hero-text .script-accent {
-    font-size: 1.5rem;
   }
   .hero-text .lead {
     font-size: 1.02rem;
