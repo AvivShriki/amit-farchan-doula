@@ -7,22 +7,6 @@
    בכיבוד prefers-reduced-motion.
    ========================================================================== */
 
-/* פונט המבטא של ההירו — לפי הנחיית אביב (קבצים מקומיים בתיקיית font) */
-@font-face {
-  font-family: 'Playpen Sans Hebrew';
-  src: url('../font/PlaypenSansHebrew-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Playpen Sans Hebrew';
-  src: url('../font/PlaypenSansHebrew-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* צבעים — קנבס */
   --color-cream: #FAF6EE;
@@ -44,12 +28,12 @@
   --color-text-soft: #6B6257;
   --color-border: #E5DAC8;
 
-  /* טיפוגרפיה — מערכת אחידה בכל האתר:
-     כותרות בפונט המהודר, כל טקסט רץ בפונט הגוף,
-     ופונט מבטא ייחודי להירו בלבד */
-  --font-heading: 'Frank Ruhl Libre', 'Times New Roman', serif;
-  --font-body: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-accent: 'Playpen Sans Hebrew', var(--font-heading);
+  /* טיפוגרפיה — מערכת אחידה בכל האתר (נבחרה עם הלקוחה):
+     Bellefair — סריף עברי עדין ואוורירי לכותרות,
+     Assistant — סאנס חם וקריא לטקסט רץ */
+  --font-heading: 'Bellefair', 'Times New Roman', serif;
+  --font-body: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-accent: var(--font-heading);
 
   /* ריווח (סקאלה של 8px) */
   --space-1: 8px;
@@ -101,7 +85,7 @@ a {
 
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.2;
   margin: 0 0 var(--space-2);
   color: var(--color-text);
@@ -307,22 +291,21 @@ button:focus-visible,
   gap: var(--space-5);
   align-items: center;
 }
-/* טיפוגרפיית ההירו — פונט המבטא לפי הנחיית אביב:
-   הפתיח ב-SemiBold, הכותרת והפסקה ב-Regular */
+/* טיפוגרפיית ההירו — כותרת בסריף העדין, פתיח ופסקה בפונט הגוף */
 .hero-text .eyebrow {
-  font-family: var(--font-accent);
+  font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 .hero-text h1 {
-  font-family: var(--font-accent);
+  font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(1.9rem, 3.6vw, 2.7rem);
-  line-height: 1.35;
+  font-size: clamp(2.2rem, 4vw, 3.1rem);
+  line-height: 1.25;
 }
 .hero-text .lead {
-  font-family: var(--font-accent);
-  font-size: 1.1rem;
+  font-family: var(--font-body);
+  font-size: 1.12rem;
   color: var(--color-text-soft);
   max-width: 46ch;
 }
