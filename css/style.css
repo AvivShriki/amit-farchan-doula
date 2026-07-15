@@ -513,12 +513,15 @@ button:focus-visible,
   object-fit: cover;
   display: block;
 }
-/* כותרת הקטגוריה — פס כיתוב מתחת לתמונה, לא מסתיר אותה כלל */
+/* כותרת הקטגוריה — פס כיתוב מתחת לתמונה, בפונט הרך של המותג
+   (לבקשת הלקוחה), לא מסתיר את התמונה כלל */
 .service-card h3 {
   margin: 0;
   padding: 12px 10px 16px;
   text-align: center;
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
   color: var(--color-text);
   /* כניסה מדורגת — הכותרות צפות פנימה כשהסקשן נחשף */
   opacity: 0;
