@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>כרטיס חלוקה — עמית פרחן | שיר למעלות</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* פונט המבטא של המותג */
+@font-face {
+  font-family: 'Playpen Sans Hebrew';
+  src: url('../font/PlaypenSansHebrew-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playpen Sans Hebrew';
+  src: url('../font/PlaypenSansHebrew-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  /* פלטת הצבעים שהלקוחה שלחה */
+  --yellow: #E8E39F;
+  --beige: #DED6C3;
+  --mauve: #A38472;
+  --mauve-deep: #7C6154;
+  --cream: #FBF3E6;
+  /* ורוד בהיר — להקפיץ ולהחיות */
+  --pink: #F5DAD6;
+  --pink-deep: #E3B7B0;
+  --text: #4A3830;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 24px;
+  background: #EDE7DC;
+  font-family: 'Heebo', sans-serif;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.side-label {
+  font-size: 13px;
+  color: #8a7d6f;
+  margin: 0;
+}
+
+/* ==== הכרטיס: 90x55 מ"מ ==== */
+.card {
+  width: 90mm;
+  height: 55mm;
+  background: var(--cream);
+  border-radius: 3.5mm;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(74, 56, 48, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ---- צד א: שיר למעלות ---- */
+.card-psalm {
+  justify-content: center;
+  padding: 4mm 6mm;
+  border: 1.2mm solid var(--yellow);
+  outline: 0.6mm solid var(--pink-deep);
+  outline-offset: -2.6mm;
+}
+.card-psalm::before,
+.card-psalm::after {
+  content: "♡";
+  position: absolute;
+  color: var(--pink-deep);
+  font-size: 3.2mm;
+}
+.card-psalm::before { top: 2.6mm; right: 4mm; }
+.card-psalm::after { bottom: 2.6mm; left: 4mm; }
+
+.psalm-title {
+  font-family: 'Playpen Sans Hebrew', cursive;
+  font-weight: 600;
+  font-size: 4.4mm;
+  margin: 0 0 0.8mm;
+  color: var(--mauve-deep);
+}
+.psalm-sub {
+  font-size: 2.7mm;
+  margin: 0 0 1.6mm;
+  color: var(--mauve);
+}
+.psalm-text {
+  font-family: 'Frank Ruhl Libre', serif;
+  font-size: 3.05mm;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ---- צד ב: בואי לעקוב ---- */
+.card-follow {
+  flex-direction: row;
+  text-align: right;
+  padding: 0;
+}
+.follow-strip {
+  width: 7mm;
+  height: 100%;
+  flex-shrink: 0;
+  background: linear-gradient(to bottom, var(--yellow) 0%, var(--yellow) 34%, var(--pink) 34%, var(--pink) 67%, var(--beige) 67%);
+}
+.follow-body {
+  flex: 1;
+  height: 100%;
+  padding: 4mm 4.5mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.follow-logo {
+  height: 10.5mm;
+  width: auto;
+  align-self: flex-start;
+  margin-bottom: 1.6mm;
+}
+.follow-name {
+  font-family: 'Playpen Sans Hebrew', cursive;
+  font-weight: 600;
+  font-size: 5mm;
+  margin: 0;
+  color: var(--text);
+}
+.follow-role {
+  font-size: 3mm;
+  font-weight: 500;
+  margin: 0.4mm 0 1.8mm;
+  color: var(--mauve);
+}
+.follow-pitch {
+  font-size: 2.9mm;
+  line-height: 1.45;
+  margin: 0;
+}
+.follow-cta {
+  font-family: 'Playpen Sans Hebrew', cursive;
+  font-size: 3.4mm;
+  margin: 1.8mm 0 0;
+  color: var(--mauve-deep);
+}
+.follow-cta .heart { color: var(--pink-deep); }
+.qr-wrap {
+  width: 26mm;
+  flex-shrink: 0;
+  height: 100%;
+  background: var(--pink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4mm;
+  padding: 3mm 2mm;
+}
+.qr-wrap img {
+  width: 20mm;
+  height: 20mm;
+  background: #fff;
+  border-radius: 1.6mm;
+  padding: 1mm;
+}
+.qr-handle {
+  font-size: 2.6mm;
+  font-weight: 600;
+  color: var(--mauve-deep);
+  direction: ltr;
+}
+
+/* ==== הדפסה ==== */
+@media print {
+  body { background: none; padding: 0; gap: 0; }
+  .side-label { display: none; }
+  .card { box-shadow: none; page-break-after: always; margin: 10mm auto; }
+}
+</style>
+</head>
+<body>
+
+<p class="side-label">צד א׳ — שיר למעלות</p>
+<div class="card card-psalm">
+  <h1 class="psalm-title">שיר למעלות</h1>
+  <p class="psalm-sub">לשמירה והגנה בלידה ועל הילוד</p>
+  <p class="psalm-text">
+    שִׁיר לַמַּעֲלוֹת אֶשָּׂא עֵינַי אֶל הֶהָרִים מֵאַיִן יָבֹא עֶזְרִי׃
+    עֶזְרִי מֵעִם ה׳ עֹשֵׂה שָׁמַיִם וָאָרֶץ׃
+    אַל יִתֵּן לַמּוֹט רַגְלֶךָ אַל יָנוּם שֹׁמְרֶךָ׃
+    הִנֵּה לֹא יָנוּם וְלֹא יִישָׁן שׁוֹמֵר יִשְׂרָאֵל׃
+    ה׳ שֹׁמְרֶךָ ה׳ צִלְּךָ עַל יַד יְמִינֶךָ׃
+    יוֹמָם הַשֶּׁמֶשׁ לֹא יַכֶּכָּה וְיָרֵחַ בַּלָּיְלָה׃
+    ה׳ יִשְׁמָרְךָ מִכָּל רָע יִשְׁמֹר אֶת נַפְשֶׁךָ׃
+    ה׳ יִשְׁמָר צֵאתְךָ וּבוֹאֶךָ מֵעַתָּה וְעַד עוֹלָם׃
+  </p>
+</div>
+
+<p class="side-label">צד ב׳ — בואי לעקוב</p>
+<div class="card card-follow">
+  <div class="follow-strip"></div>
+  <div class="follow-body">
+    <img class="follow-logo" src="../assets/photos/logo-full.png" alt="הלוגו של עמית פרחן">
+    <p class="follow-name">עמית פרחן</p>
+    <p class="follow-role">דולה ומדריכת הנקה</p>
+    <p class="follow-pitch">לתוכן איכותי בנושא הריון, לידה והנקה</p>
+    <p class="follow-cta">בואי לעקוב <span class="heart">♡</span></p>
+  </div>
+  <div class="qr-wrap">
+    <img src="instagram-qr.png" alt="קוד סריקה לאינסטגרם של עמית">
+    <span class="qr-handle">@amit_far</span>
+  </div>
+</div>
+
+</body>
+</html>
