@@ -2,7 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavToggle();
-  initTestimonials();
   initScrollReveal();
 });
 
@@ -54,52 +53,4 @@ function initNavToggle() {
       toggle.setAttribute('aria-expanded', 'false');
     });
   });
-}
-
-function initTestimonials() {
-  const root = document.querySelector('.testimonials');
-  if (!root) return;
-
-  const slidesWrap = root.querySelector('.testimonial-slides');
-  const slides = Array.from(root.querySelectorAll('.testimonial-card'));
-  const dotsWrap = root.querySelector('.testimonial-dots');
-  if (!slidesWrap || slides.length === 0) return;
-
-  let current = 0;
-  let timer = null;
-
-  slides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'testimonial-dot';
-    dot.type = 'button';
-    dot.setAttribute('aria-label', `עברי להמלצה ${i + 1}`);
-    dot.addEventListener('click', () => goTo(i));
-    dotsWrap.appendChild(dot);
-  });
-  const dots = Array.from(dotsWrap.querySelectorAll('.testimonial-dot'));
-
-  function render() {
-    slidesWrap.style.transform = `translateX(${current * 100}%)`;
-    dots.forEach((d, i) => {
-      d.classList.toggle('is-active', i === current);
-      d.setAttribute('aria-current', i === current ? 'true' : 'false');
-    });
-  }
-
-  function goTo(index) {
-    current = (index + slides.length) % slides.length;
-    render();
-    resetTimer();
-  }
-
-  function resetTimer() {
-    if (timer) clearInterval(timer);
-    timer = setInterval(() => goTo(current + 1), 6000);
-  }
-
-  render();
-  resetTimer();
-
-  root.addEventListener('mouseenter', () => timer && clearInterval(timer));
-  root.addEventListener('mouseleave', resetTimer);
 }

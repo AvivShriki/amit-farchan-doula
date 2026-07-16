@@ -102,6 +102,7 @@ p { margin: 0 0 var(--space-2); }
   font-size: 1rem;
   color: var(--color-olive-deep);
   font-weight: 600;
+  letter-spacing: 0.06em;
   margin-bottom: var(--space-1);
 }
 
@@ -147,6 +148,7 @@ button:focus-visible,
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
+  letter-spacing: 0.04em;
   padding: 14px 28px;
   border-radius: var(--radius-pill);
   border: 2px solid transparent;
@@ -193,6 +195,45 @@ button:focus-visible,
   padding: 10px 20px;
   font-size: 0.9rem;
   min-height: 40px;
+}
+
+/* ==========================================================================
+   פס הכרזה עליון — הצעת הערך שמורידה את חסם הפנייה
+   ========================================================================== */
+
+.announcement-bar {
+  background: var(--color-taupe-deep);
+  color: var(--color-cream);
+  text-align: center;
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 9px var(--space-2);
+}
+
+/* ==========================================================================
+   כפתור וואטסאפ צף — זמין בכל שלב בגלילה
+   ========================================================================== */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  inset-inline-end: 20px;
+  z-index: 200;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.whatsapp-float:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
 /* ==========================================================================
@@ -327,10 +368,17 @@ button:focus-visible,
   width: 100%;
   height: 100%;
 }
-.hero-media img {
+.hero-media img,
+.hero-media video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+/* וידאו חי בדסקטופ; התמונה מוסתרת. במובייל ובצמצום תנועה — הפוך */
+.hero-photo { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+  .hero-photo { display: block; }
 }
 
 .page-hero {
@@ -720,23 +768,24 @@ button:focus-visible,
 }
 
 /* ==========================================================================
-   המלצות — בועות דיבור בגוונים מתחלפים
+   המלצות — קיר ביקורות בגוונים מתחלפים (בהשראת קיר הביקורות של בייביפנס)
    ========================================================================== */
 
-.testimonials {
-  position: relative;
-  max-width: 720px;
+.reviews-stats {
+  text-align: center;
+  color: var(--color-olive-deep);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin: calc(-1 * var(--space-4)) auto var(--space-4);
+}
+.reviews-wall {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+  max-width: 920px;
   margin-inline: auto;
 }
-.testimonial-track {
-  overflow: hidden;
-}
-.testimonial-slides {
-  display: flex;
-  transition: transform 0.4s ease;
-}
 .testimonial-card {
-  flex: 0 0 100%;
   margin: 0 0 14px;
   background: var(--color-cream-tint);
   border-radius: var(--radius-card);
@@ -757,10 +806,10 @@ button:focus-visible,
   transform: rotate(45deg);
   box-shadow: 4px 4px 6px -4px rgba(59, 50, 43, 0.12);
 }
-.testimonial-slides > .testimonial-card:nth-child(3n+2) {
+.reviews-wall > .testimonial-card:nth-child(3n+2) {
   background: var(--color-olive-tint);
 }
-.testimonial-slides > .testimonial-card:nth-child(3n+3) {
+.reviews-wall > .testimonial-card:nth-child(3n+3) {
   background: var(--color-taupe-tint);
 }
 .testimonial-quote-mark {
@@ -780,32 +829,6 @@ button:focus-visible,
   font-weight: 600;
   font-style: normal;
 }
-.testimonial-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  margin-top: var(--space-3);
-}
-/* הנקודה הנראית נשארת 12px, אבל שטח הלחיצה הוא 44x44 (מינימום מומלץ למגע) —
-   ה-padding שקוף והצבע נצבע רק על content-box */
-.testimonial-dot {
-  box-sizing: content-box;
-  width: 12px;
-  height: 12px;
-  padding: 16px;
-  border-radius: 50%;
-  border: none;
-  background: var(--color-border);
-  background-clip: content-box;
-  cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-.testimonial-dot.is-active,
-.testimonial-dot[aria-current="true"] {
-  background: var(--color-olive);
-  transform: scale(1.15);
-}
-
 /* ==========================================================================
    באנר CTA — תמונה + טקסט, כמו סקשן הסיום במוקאפ הייחוס
    ========================================================================== */
@@ -932,6 +955,9 @@ button:focus-visible,
     box-shadow: none;
     z-index: 0;
   }
+  /* במובייל: וידאו כבוי, התמונה עם הקיר הפנוי מוצגת */
+  .hero-video { display: none; }
+  .hero-photo { display: block; }
   .hero-media img {
     object-position: center;
     animation: heroKenBurns 9s ease-out forwards;
@@ -981,6 +1007,9 @@ button:focus-visible,
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2);
+  }
+  .reviews-wall {
+    grid-template-columns: 1fr;
   }
   .service-card h3 {
     font-size: 0.95rem;
