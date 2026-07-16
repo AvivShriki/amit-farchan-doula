@@ -374,11 +374,12 @@ button:focus-visible,
   height: 100%;
   object-fit: cover;
 }
-/* וידאו חי בדסקטופ; התמונה מוסתרת. במובייל ובצמצום תנועה — הפוך */
+/* וידאו חי בכל המסכים; בהעדפת צמצום תנועה מוצגת התמונה במקומו
+   (important כדי לגבור גם על כללי המובייל שמופיעים בהמשך הקובץ) */
 .hero-photo { display: none; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-video { display: none; }
-  .hero-photo { display: block; }
+  .hero-video { display: none !important; }
+  .hero-photo { display: block !important; }
 }
 
 .page-hero {
@@ -955,12 +956,17 @@ button:focus-visible,
     box-shadow: none;
     z-index: 0;
   }
-  /* במובייל: וידאו כבוי, התמונה עם הקיר הפנוי מוצגת */
-  .hero-video { display: none; }
-  .hero-photo { display: block; }
   .hero-media img {
     object-position: center;
     animation: heroKenBurns 9s ease-out forwards;
+  }
+  /* שכבת הבהרה בחלק העליון — שומרת על קריאות הטקסט מעל הוידאו הנע */
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(250, 246, 238, 0.92) 0%, rgba(250, 246, 238, 0.65) 38%, rgba(250, 246, 238, 0) 62%);
+    pointer-events: none;
   }
   .hero-text {
     position: relative;
