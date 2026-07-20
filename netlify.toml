@@ -1,0 +1,4 @@
+# תצורת האחסון (Netlify) — מוכן לחיבור החשבון של עמית
+[build]
+  command = "npm run build"
+  publish = "_site"

@@ -1,0 +1,201 @@
+# תצורת פאנל הניהול של עמית — Sveltia CMS
+# ההתחברות דרך GitHub תופעל בשלב חיבור האחסון (Netlify).
+# לבדיקה מקומית: Sveltia יודעת לעבוד ישירות מול התיקייה המקומית בכרום.
+
+backend:
+  name: github
+  repo: AvivShriki/amit-farchan-doula
+  branch: master
+  automatic_deployments: true
+
+site_url: https://avivshriki.github.io/amit-farchan-doula
+locale: he
+
+media_folder: assets/photos
+public_folder: assets/photos
+
+collections:
+  - name: pages
+    label: עמודי האתר
+    files:
+      - name: site
+        label: הגדרות כלליות (טלפון, וואטסאפ, פס הכרזה)
+        file: content/site.json
+        fields:
+          - { name: announcement, label: פס ההכרזה בראש האתר, widget: string }
+          - { name: whatsapp, label: "מספר וואטסאפ בפורמט בינלאומי (למשל 9725...)", widget: string }
+          - { name: phoneDisplay, label: טלפון כפי שמוצג באתר, widget: string }
+          - { name: phoneTel, label: טלפון לחיוג (ספרות בלבד), widget: string }
+          - { name: email, label: אימייל, widget: string }
+          - { name: instagram, label: קישור לאינסטגרם, widget: string }
+          - { name: footerLine, label: שורת הפוטר, widget: string }
+          - { name: copyright, label: שורת זכויות יוצרים, widget: string }
+          - { name: logo, label: לוגו, widget: image }
+          - { name: name, label: שם האתר (לתצוגה בשיתוף קישורים), widget: string }
+          - { name: url, label: "כתובת האתר (לא לשנות בלי אביב)", widget: string }
+
+      - name: home
+        label: עמוד הבית
+        file: content/home.json
+        fields:
+          - name: meta
+            label: כותרת ותיאור לגוגל ולשיתוף
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: כותרת הדף (בגוגל), widget: string }
+              - { name: description, label: תיאור הדף (בגוגל), widget: text }
+              - { name: ogImage, label: תמונת שיתוף, widget: image }
+              - { name: ogImageWidth, label: רוחב תמונת שיתוף, widget: number }
+              - { name: ogImageHeight, label: גובה תמונת שיתוף, widget: number }
+          - name: hero
+            label: פתיח (הירו)
+            widget: object
+            fields:
+              - { name: eyebrow, label: שורה קטנה מעל הכותרת, widget: string }
+              - { name: title, label: הכותרת הגדולה (כל שורה בנפרד), widget: text }
+              - { name: lead, label: משפט פתיחה, widget: text }
+              - { name: ctaText, label: טקסט הכפתור, widget: string }
+              - { name: image, label: תמונת הפתיח, widget: image }
+              - { name: imageMobile, label: תמונת הפתיח למובייל, widget: image }
+              - { name: imageAlt, label: תיאור התמונה (לנגישות), widget: string }
+              - { name: video, label: נתיב סרטון הרקע, widget: string, required: false }
+              - { name: imageWidth, label: רוחב התמונה בפיקסלים, widget: number }
+              - { name: imageHeight, label: גובה התמונה בפיקסלים, widget: number }
+          - name: services
+            label: השירותים
+            widget: object
+            fields:
+              - { name: title, label: כותרת האזור, widget: string }
+              - name: cards
+                label: כרטיסי השירותים
+                widget: list
+                fields:
+                  - { name: title, label: שם השירות, widget: string }
+                  - { name: link, label: "קישור (לא לשנות בלי אביב)", widget: string }
+                  - { name: image, label: תמונה, widget: image }
+                  - { name: imageAlt, label: תיאור התמונה, widget: string }
+                  - { name: imageWidth, label: רוחב בפיקסלים, widget: number }
+                  - { name: imageHeight, label: גובה בפיקסלים, widget: number }
+              - { name: quote, label: ציטוט מתחת לשירותים (כל פסקה בשורה), widget: list, field: { name: p, label: פסקה, widget: text } }
+          - name: process
+            label: תהליך הליווי
+            widget: object
+            fields:
+              - { name: eyebrow, label: שורה קטנה מעל הכותרת, widget: string }
+              - { name: title, label: כותרת, widget: string }
+              - { name: subtitle, label: משפט מתחת לכותרת, widget: text }
+              - name: steps
+                label: שלבי התהליך
+                widget: list
+                fields:
+                  - { name: title, label: כותרת השלב, widget: string }
+                  - { name: text, label: תיאור השלב, widget: text }
+                  - { name: image, label: תמונה, widget: image }
+                  - { name: imageAlt, label: תיאור התמונה, widget: string }
+                  - { name: imageWidth, label: רוחב בפיקסלים, widget: number }
+                  - { name: imageHeight, label: גובה בפיקסלים, widget: number }
+          - name: about
+            label: מי אני
+            widget: object
+            fields:
+              - { name: eyebrow, label: שורה קטנה מעל הכותרת, widget: string }
+              - { name: title, label: כותרת (כל שורה בנפרד), widget: text }
+              - { name: lead, label: משפט מודגש, widget: text }
+              - { name: text, label: פסקת היכרות, widget: text }
+              - { name: badges, label: תגי הסמכה, widget: list, field: { name: badge, label: תג, widget: string } }
+              - { name: hospitalsLabel, label: תווית בתי החולים, widget: string }
+              - { name: hospitals, label: רשימת בתי החולים, widget: string }
+              - { name: buttonText, label: טקסט הכפתור, widget: string }
+              - { name: image, label: תמונה, widget: image }
+              - { name: imageAlt, label: תיאור התמונה, widget: string }
+              - { name: imageWidth, label: רוחב בפיקסלים, widget: number }
+              - { name: imageHeight, label: גובה בפיקסלים, widget: number }
+          - name: testimonials
+            label: המלצות
+            widget: object
+            fields:
+              - { name: title, label: כותרת, widget: string }
+              - { name: stats, label: שורת ההסמכות, widget: string }
+              - name: items
+                label: ההמלצות
+                widget: list
+                fields:
+                  - { name: text, label: טקסט ההמלצה, widget: text }
+                  - { name: author, label: שם הממליצה, widget: string }
+          - name: contact
+            label: אזור צור קשר
+            widget: object
+            fields:
+              - { name: title, label: כותרת, widget: string }
+              - { name: text, label: משפט, widget: string }
+              - { name: buttonText, label: טקסט הכפתור, widget: string }
+              - { name: image, label: תמונה, widget: image }
+              - { name: imageAlt, label: תיאור התמונה, widget: string }
+              - { name: imageWidth, label: רוחב בפיקסלים, widget: number }
+              - { name: imageHeight, label: גובה בפיקסלים, widget: number }
+
+      - name: doula
+        label: עמוד — ליווי בהריון ובלידה (דולה)
+        file: content/doula.json
+        fields: &servicePageFields
+          - name: meta
+            label: כותרת ותיאור לגוגל ולשיתוף
+            widget: object
+            collapsed: true
+            fields:
+              - { name: title, label: כותרת הדף (בגוגל), widget: string }
+              - { name: description, label: תיאור הדף (בגוגל), widget: text }
+              - { name: ogImage, label: תמונת שיתוף, widget: image }
+              - { name: ogImageWidth, label: רוחב תמונת שיתוף, widget: number }
+              - { name: ogImageHeight, label: גובה תמונת שיתוף, widget: number }
+          - { name: title, label: כותרת העמוד, widget: string }
+          - { name: ctaButtonText, label: טקסט כפתור הפתיח, widget: string }
+          - { name: image, label: תמונת העמוד, widget: image }
+          - { name: imageAlt, label: תיאור התמונה, widget: string }
+          - { name: imageWidth, label: רוחב בפיקסלים, widget: number }
+          - { name: imageHeight, label: גובה בפיקסלים, widget: number }
+          - name: intro
+            label: חלק ראשון
+            widget: object
+            fields:
+              - { name: paragraphs, label: פסקאות פתיחה, widget: list, field: { name: p, label: פסקה, widget: text } }
+              - { name: questions, label: רשימת נקודות, widget: list, required: false, field: { name: q, label: נקודה, widget: string } }
+              - { name: closing, label: פסקאות סיום, widget: list, required: false, field: { name: p, label: פסקה, widget: text } }
+          - name: body
+            label: חלק שני
+            widget: object
+            fields:
+              - { name: paragraphs, label: פסקאות, widget: list, field: { name: p, label: פסקה, widget: text } }
+              - { name: checklistIntro, label: "(שדה טכני — להשאיר ריק)", widget: hidden, required: false }
+              - { name: checklist, label: רשימה עם וי ✓, widget: list, required: false, field: { name: item, label: שורה, widget: string } }
+              - { name: paragraphsAfter, label: פסקאות אחרי הרשימה, widget: list, required: false, field: { name: p, label: פסקה, widget: text } }
+          - name: testimonial
+            label: המלצה (לא חובה)
+            widget: object
+            required: false
+            fields:
+              - { name: text, label: טקסט ההמלצה, widget: text, required: false }
+              - { name: author, label: שם הממליצה, widget: string, required: false }
+          - name: cta
+            label: אזור סיום
+            widget: object
+            fields:
+              - { name: title, label: כותרת, widget: string }
+              - { name: text, label: משפט, widget: string }
+              - { name: buttonText, label: טקסט הכפתור, widget: string }
+
+      - name: birth_prep
+        label: עמוד — הכנה ללידה
+        file: content/birth_prep.json
+        fields: *servicePageFields
+
+      - name: breastfeeding
+        label: עמוד — ייעוץ הנקה
+        file: content/breastfeeding.json
+        fields: *servicePageFields
+
+      - name: breastfeeding_prep
+        label: עמוד — הכנה להנקה
+        file: content/breastfeeding_prep.json
+        fields: *servicePageFields

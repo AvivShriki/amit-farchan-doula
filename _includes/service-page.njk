@@ -1,0 +1,82 @@
+{%- import "macros.njk" as m -%}
+  <section class="section">
+    <div class="container">
+      <a href="index.html#services" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 5l6 7-6 7M19 12H5"/></svg>
+        חזרה לכל השירותים
+      </a>
+
+      <div class="page-hero">
+        <div class="page-hero-text">
+          <h1>{{ d.title }}</h1>
+          <div class="hero-actions">
+            {{ m.whatsappButton(site, d.ctaButtonText) }}
+          </div>
+        </div>
+        <div class="page-hero-media">
+          <img src="{{ d.image }}" alt="{{ d.imageAlt }}" width="{{ d.imageWidth }}" height="{{ d.imageHeight }}" loading="eager">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container article-body">
+      {%- for p in d.intro.paragraphs %}
+      <p>{{ p }}</p>
+      {%- endfor %}
+      {%- if d.intro.questions and d.intro.questions.length %}
+      <ul class="question-list reveal">
+        {%- for q in d.intro.questions %}
+        <li>{{ q }}</li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+
+      {%- for p in d.intro.closing %}
+      <p>{{ p }}</p>
+      {%- endfor %}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container article-body">
+      {%- for p in d.body.paragraphs %}
+      <p class="reveal">{{ p }}</p>
+      {%- endfor %}
+      {%- if d.body.checklist and d.body.checklist.length %}
+      <ul class="includes-list reveal">
+        {%- for item in d.body.checklist %}
+        <li><span class="check" aria-hidden="true">✓</span><span>{{ item }}</span></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      {%- for p in d.body.paragraphsAfter %}
+      <p class="reveal">{{ p }}</p>
+      {%- endfor %}
+    </div>
+  </section>
+
+  {%- if d.testimonial %}
+  <section class="section">
+    <div class="container" style="max-width: 640px;">
+      <blockquote class="testimonial-card reveal">
+        <span class="testimonial-quote-mark" aria-hidden="true">”</span>
+        <p class="testimonial-text">{{ d.testimonial.text }}</p>
+        <cite class="testimonial-author">— {{ d.testimonial.author }}</cite>
+      </blockquote>
+    </div>
+  </section>
+  {%- endif %}
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2>{{ d.cta.title }}</h2>
+        <p>{{ d.cta.text }}</p>
+        <div class="cta-actions">
+          {{ m.whatsappButton(site, d.cta.buttonText) }}
+        </div>
+      </div>
+    </div>
+  </section>

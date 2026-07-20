@@ -1,0 +1,76 @@
+{%- import "macros.njk" as m -%}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ meta.title }}</title>
+<meta name="description" content="{{ meta.description }}">
+<!-- תצוגה מקדימה בשיתוף קישור (וואטסאפ, פייסבוק, אינסטגרם) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ meta.title }}">
+<meta property="og:description" content="{{ meta.description }}">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:image" content="{{ site.url }}/{{ meta.ogImage }}">
+<meta property="og:image:width" content="{{ meta.ogImageWidth }}">
+<meta property="og:image:height" content="{{ meta.ogImageHeight }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">דלגי לתוכן הראשי</a>
+
+<div class="announcement-bar">{{ site.announcement }}</div>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="index.html" class="brand">
+      <img class="brand-logo" src="{{ site.logo }}" alt="{{ site.name }}">
+    </a>
+
+    <nav class="main-nav" aria-label="ניווט ראשי">
+      <ul>
+        <li><a href="index.html" class="nav-link{% if active == "home" %} is-active{% endif %}">בית</a></li>
+        <li><a href="index.html#about" class="nav-link">אודות</a></li>
+        <li><a href="index.html#services" class="nav-link{% if active == "services" %} is-active{% endif %}">השירותים</a></li>
+        <li><a href="index.html#testimonials" class="nav-link">המלצות</a></li>
+        <li><a href="index.html#contact" class="nav-link">צור קשר</a></li>
+      </ul>
+    </nav>
+
+    <button class="nav-toggle" aria-label="פתיחת תפריט ניווט" aria-expanded="false" aria-controls="main-nav"><span aria-hidden="true"></span></button>
+  </div>
+</header>
+
+<main id="main">
+{{ content | safe }}
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-social">
+      <a href="{{ site.instagram }}" target="_blank" rel="noopener" aria-label="עמוד האינסטגרם של עמית פרחן">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </a>
+      <a href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener" aria-label="שליחת הודעת וואטסאפ">
+        {{ m.whatsappIcon(16, 18, false) }}
+      </a>
+    </div>
+    <p>{{ site.footerLine }}</p>
+    <p><a href="tel:{{ site.phoneTel }}">{{ site.phoneDisplay }}</a> · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+    <p>{{ site.copyright }}</p>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener" aria-label="שליחת הודעת וואטסאפ לעמית">
+  {{ m.whatsappIcon(26, 28) }}
+</a>
+
+<script src="js/main.js"></script>
+</body>
+</html>

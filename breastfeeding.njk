@@ -1,0 +1,12 @@
+---js
+{
+  layout: "layout.njk",
+  permalink: "breastfeeding.html",
+  active: "services",
+  eleventyComputed: {
+    meta: (data) => data.breastfeeding.meta,
+    d: (data) => data.breastfeeding
+  }
+}
+---
+{% include "service-page.njk" %}

@@ -1,0 +1,12 @@
+---js
+{
+  layout: "layout.njk",
+  permalink: "doula.html",
+  active: "services",
+  eleventyComputed: {
+    meta: (data) => data.doula.meta,
+    d: (data) => data.doula
+  }
+}
+---
+{% include "service-page.njk" %}

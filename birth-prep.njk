@@ -1,0 +1,12 @@
+---js
+{
+  layout: "layout.njk",
+  permalink: "birth-prep.html",
+  active: "services",
+  eleventyComputed: {
+    meta: (data) => data.birth_prep.meta,
+    d: (data) => data.birth_prep
+  }
+}
+---
+{% include "service-page.njk" %}

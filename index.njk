@@ -1,0 +1,156 @@
+---js
+{
+  layout: "layout.njk",
+  permalink: "index.html",
+  active: "home",
+  eleventyComputed: {
+    meta: (data) => data.home.meta
+  }
+}
+---
+{%- import "macros.njk" as m -%}
+
+  <!-- הירו -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">{{ home.hero.eyebrow }}</p>
+        <h1>{{ home.hero.title | nl2br | safe }}</h1>
+        <p class="lead">{{ home.hero.lead }}</p>
+        <svg class="heart-doodle" width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 30s-9-5.5-9-12c0-3.5 2.5-6 6-6 1.8 0 3 .8 3 .8s1.2-.8 3-.8c3.5 0 6 2.5 6 6 0 6.5-9 12-9 12z" fill="currentColor"/>
+          <path d="M6 34c4-3 8 3 12 0s8-3 12 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+        <div class="hero-actions">
+          {{ m.whatsappButton(site, home.hero.ctaText) }}
+        </div>
+      </div>
+      <div class="hero-media">
+        <!-- וידאו חי בדסקטופ; במובייל ובהעדפת צמצום תנועה מוצגת התמונה -->
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="{{ home.hero.image }}" aria-hidden="true">
+          <source src="{{ home.hero.video }}" type="video/mp4">
+        </video>
+        <picture class="hero-photo">
+          <!-- במובייל: גרסה עם קיר פנוי רחב בצד ימין, שמפנה מקום לטקסט -->
+          <source media="(max-width: 900px)" srcset="{{ home.hero.imageMobile }}">
+          <img src="{{ home.hero.image }}" alt="{{ home.hero.imageAlt }}" width="{{ home.hero.imageWidth }}" height="{{ home.hero.imageHeight }}" loading="eager">
+        </picture>
+      </div>
+    </div>
+  </section>
+
+  <!-- השירותים — 4 כרטיסים לחיצים, מימין לשמאל -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>{{ home.services.title }}</h2>
+      </div>
+
+      <div class="services-grid reveal">
+        {%- for card in home.services.cards %}
+        <a class="service-card" href="{{ card.link }}">
+          <img src="{{ card.image }}" alt="{{ card.imageAlt }}" width="{{ card.imageWidth }}" height="{{ card.imageHeight }}" loading="lazy">
+          <h3>{{ card.title }}</h3>
+        </a>
+        {%- endfor %}
+      </div>
+
+      <blockquote class="services-quote reveal">
+        {%- for p in home.services.quote %}
+        <p>{{ p }}</p>
+        {%- endfor %}
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- תהליך העבודה -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">{{ home.process.eyebrow }}</p>
+        <h2>{{ home.process.title }}</h2>
+        <p>{{ home.process.subtitle }}</p>
+      </div>
+
+      <div class="process-grid reveal">
+        {%- for step in home.process.steps %}
+        <div class="process-step">
+          <div class="process-image">
+            <img src="{{ step.image }}" alt="{{ step.imageAlt }}" width="{{ step.imageWidth }}" height="{{ step.imageHeight }}" loading="lazy">
+            <span class="process-number" aria-hidden="true">{{ loop.index }}</span>
+          </div>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.text }}</p>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- מי אני -->
+  <section class="section section-alt" id="about">
+    <div class="container about-grid">
+      <div class="about-media reveal">
+        <img src="{{ home.about.image }}" alt="{{ home.about.imageAlt }}" width="{{ home.about.imageWidth }}" height="{{ home.about.imageHeight }}" loading="lazy">
+        <span class="heart-doodle" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9C.5 8 2 4 6 4c2 0 4 1.5 6 5 2-3.5 4-5 6-5 4 0 5.5 4 3.5 8-2.5 4.5-9.5 9-9.5 9z" fill="currentColor"/></svg>
+        </span>
+      </div>
+      <div class="about-text reveal">
+        <p class="eyebrow">{{ home.about.eyebrow }}</p>
+        <h2>{{ home.about.title | nl2br | safe }}</h2>
+        <p class="lead">{{ home.about.lead }}</p>
+        <p>{{ home.about.text }}</p>
+        <div class="credentials-row">
+          {%- for badge in home.about.badges %}
+          <span class="credential-badge">{{ badge }}</span>
+          {%- endfor %}
+        </div>
+        <p class="hospitals-line"><strong>{{ home.about.hospitalsLabel }}</strong> {{ home.about.hospitals }}</p>
+        <a class="btn btn-secondary" href="#contact">{{ home.about.buttonText }}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- המלצות -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2>{{ home.testimonials.title }}</h2>
+      </div>
+
+      <p class="reviews-stats reveal">{{ home.testimonials.stats }}</p>
+
+      <div class="reviews-wall reveal">
+        {%- for t in home.testimonials.items %}
+        <blockquote class="testimonial-card">
+          <span class="testimonial-quote-mark" aria-hidden="true">”</span>
+          <p class="testimonial-text">{{ t.text }}</p>
+          <cite class="testimonial-author">— {{ t.author }}</cite>
+        </blockquote>
+        {%- endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA + צור קשר -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="cta-banner cta-banner--split reveal">
+        <div class="cta-media">
+          <img src="{{ home.contact.image }}" alt="{{ home.contact.imageAlt }}" width="{{ home.contact.imageWidth }}" height="{{ home.contact.imageHeight }}" loading="lazy">
+        </div>
+        <div class="cta-text">
+          <svg class="heart-doodle" width="36" height="36" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 30s-9-5.5-9-12c0-3.5 2.5-6 6-6 1.8 0 3 .8 3 .8s1.2-.8 3-.8c3.5 0 6 2.5 6 6 0 6.5-9 12-9 12z" fill="currentColor"/>
+            <path d="M6 34c4-3 8 3 12 0s8-3 12 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+          <h2>{{ home.contact.title }}</h2>
+          <p>{{ home.contact.text }}</p>
+          <div class="cta-actions">
+            {{ m.whatsappButton(site, home.contact.buttonText) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

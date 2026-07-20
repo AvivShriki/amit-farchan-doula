@@ -1,0 +1,13 @@
+{
+  "name": "amit-farchan-doula",
+  "version": "2.0.0",
+  "description": "האתר של עמית פרחן — דולה ומדריכת הנקה. אתר סטטי עם מערכת ניהול תוכן.",
+  "private": true,
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}
